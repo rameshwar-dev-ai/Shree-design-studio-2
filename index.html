@@ -1,29 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shree Design Studio | Innovative Design Meets AI Excellence</title>
-code
-Code
-<!-- Fonts -->
+<title>Shree Design Studio</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-<!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- React & Babel -->
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-<!-- Framer Motion -->
 <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.js"></script>
 
-<!-- Lucide Icons -->
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <script>
@@ -56,1885 +49,385 @@ Code
         -webkit-font-smoothing: antialiased;
         min-height: 100vh;
     }
-    
-    h1, h2, h3, h4 {
-        font-family: 'Playfair Display', serif;
-    }
-
-    .gold-gradient {
-        background: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #A68926 100%);
-    }
-
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+    .gold-gradient { background: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #A68926 100%); }
     .gold-text-gradient {
         background-clip: text;
         -webkit-background-clip: text;
         color: transparent;
         background-image: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #A68926 100%);
     }
-
     .glass-card {
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.2);
     }
-
-    .glass-card-hover {
-        transition: all 0.3s ease;
-    }
-    .glass-card-hover:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .icon-glow {
-        filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-        background: #121212;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #D4AF37;
-        border-radius: 10px;
-    }
+    .icon-glow { filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5)); }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #121212; }
+    ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
 </style>
 </head>
 <body>
 <div id="root"></div>
-code
-Code
+
 <script type="text/babel">
     const { useState, useEffect, useRef } = React;
     const { motion, AnimatePresence } = Motion;
 
-    // Helper to use Lucide icons in React
     const Icon = ({ name, size = 24, className = "" }) => {
         const iconRef = useRef(null);
-        
         useEffect(() => {
             if (iconRef.current) {
                 const icon = lucide.icons[name];
                 if (icon) {
-                    const svg = lucide.createIcons({
+                    lucide.createIcons({
                         icons: { [name]: icon },
-                        attrs: {
-                            stroke: "currentColor",
-                            "stroke-width": 2,
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round",
-                            width: size,
-                            height: size,
-                            class: className
-                        }
+                        attrs: { stroke: "currentColor", "stroke-width": 2, width: size, height: size, class: className }
                     });
                 }
             }
         }, [name, size, className]);
-
         return <i ref={iconRef} data-lucide={name} className={className}></i>;
     };
 
-    const Navbar = () => {
-        const [isScrolled, setIsScrolled] = useState(false);
-        const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-        useEffect(() => {
-            const handleScroll = () => setIsScrolled(window.scrollY > 50);
-            window.addEventListener('scroll', handleScroll);
-            return () => window.removeEventListener('scroll', handleScroll);
-        }, []);
-
-        const navLinks = [
-            { name: 'About', href: '#about' },
-            { name: 'Services', href: '#services' },
-            { name: 'Portfolio', href: '#portfolio' },
-            { name: 'Contact', href: '#contact' },
-        ];
-
-        return (
-            <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/10 backdrop-blur-md py-4 border-b border-white/20' : 'bg-transparent py-6'}`}>
-                <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-                    <a href="#" className="text-2xl font-serif font-bold gold-text-gradient tracking-tighter">
-                        SHREE
-                    </a>
-
-                    <div className="hidden md:flex items-center space-x-8">
-                        {navLinks.map((link) => (
-                            <a 
-                                key={link.name} 
-                                href={link.href} 
-                                className="text-sm font-medium text-white/70 hover:text-gold transition-colors"
-                            >
-                                {link.name}
-                            </a>
-                        ))}
-                        <a 
-                            href="#contact" 
-                            className="px-5 py-2 rounded-full border border-gold/50 text-gold text-sm font-medium hover:bg-gold hover:text-charcoal transition-all duration-300"
-                        >
-                            Get Started
-                        </a>
-                    </div>
-
-                    <button 
-                        className="md:hidden text-white"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    >
-                        {isMobileMenuOpen ? <Icon name="X" /> : <Icon name="Menu" />}
-                    </button>
+    const Navbar = () => (
+        <nav className="fixed top-0 left-0 w-full z-50 bg-white/10 backdrop-blur-md py-4 border-b border-white/20">
+            <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+                <a href="#" className="text-2xl font-serif font-bold gold-text-gradient tracking-tighter">SHREE</a>
+                <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-white/70">
+                    <a href="#about" className="hover:text-gold">About</a>
+                    <a href="#services" className="hover:text-gold">Services</a>
+                    <a href="#contact" className="px-5 py-2 rounded-full border border-gold/50 text-gold hover:bg-gold hover:text-charcoal transition-all">Get Started</a>
                 </div>
+            </div>
+        </nav>
+    );
 
-                <AnimatePresence>
-                    {isMobileMenuOpen && (
-                        <motion.div 
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="absolute top-full left-0 w-full bg-charcoal/95 backdrop-blur-xl border-b border-white/20 p-6 md:hidden"
-                        >
-                            <div className="flex flex-col space-y-4">
-                                {navLinks.map((link) => (
-                                    <a 
-                                        key={link.name} 
-                                        href={link.href} 
-                                        className="text-lg font-medium text-white/80"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                    >
-                                        {link.name}
-                                    </a>
-                                ))}
-                                <a 
-                                    href="#contact" 
-                                    className="w-full py-3 rounded-lg gold-gradient text-charcoal text-center font-bold"
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                    Get Started
-                                </a>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </nav>
-        );
-    };
-
-    const Hero = () => {
-        return (
-            <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-                <div className="absolute top-1/4 -left-20 w-96 h-96 bg-gold/10 rounded-full blur-[120px]" />
-                <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-navy-dark/40 rounded-full blur-[120px]" />
-                
-                <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <span className="inline-block py-1 px-4 rounded-full border border-gold/30 text-gold text-xs font-bold tracking-widest uppercase mb-6">
-                            Creative Design & AI Agency
-                        </span>
-                        <h1 className="text-6xl md:text-8xl font-serif font-bold mb-6 leading-tight">
-                            Shree <span className="gold-text-gradient italic">Design</span> Studio
-                        </h1>
-                        <p className="text-xl md:text-2xl text-white/60 max-w-2xl mx-auto mb-10 font-light">
-                            Innovative Design Meets AI Excellence. We craft premium digital experiences that define the future.
-                        </p>
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <a 
-                                href="#contact" 
-                                className="group px-8 py-4 rounded-full gold-gradient text-charcoal font-bold text-lg flex items-center gap-2 hover:scale-105 transition-transform"
-                            >
-                                Get Started
-                                <Icon name="ChevronRight" size={20} className="group-hover:translate-x-1 transition-transform" />
-                            </a>
-                            <a 
-                                href="#portfolio" 
-                                className="px-8 py-4 rounded-full border border-white/20 text-white font-medium text-lg hover:bg-white/5 transition-colors"
-                            >
-                                View Portfolio
-                            </a>
-                        </div>
-                    </motion.div>
-                </div>
-                
-                <motion.div 
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/30"
-                >
-                    <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center p-1">
-                        <div className="w-1 h-2 bg-gold rounded-full" />
+    const Hero = () => (
+        <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+                    <h1 className="text-6xl md:text-8xl font-serif font-bold mb-6 leading-tight">
+                        Shree <span className="gold-text-gradient italic">Design</span> Studio
+                    </h1>
+                    <p className="text-xl md:text-2xl text-white/60 max-w-2xl mx-auto mb-10 font-light">
+                        Innovative Design Meets AI Excellence. We craft premium digital experiences that define the future.
+                    </p>
+                    <div className="flex gap-4 justify-center">
+                        <a href="#contact" className="px-8 py-4 rounded-full gold-gradient text-charcoal font-bold text-lg">Get Started</a>
                     </div>
                 </motion.div>
-            </section>
-        );
-    };
-
-    const About = () => {
-        return (
-            <section id="about" className="py-24 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid md:grid-cols-2 gap-16 items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">
-                                Crafting the <span className="gold-text-gradient">Digital Future</span>
-                            </h2>
-                            <p className="text-lg text-white/70 mb-6 leading-relaxed">
-                                Shree Design Studio is a boutique creative agency where artistry meets cutting-edge technology. We specialize in delivering premium digital products that don't just look beautiful but perform exceptionally.
-                            </p>
-                            <p className="text-lg text-white/70 mb-8 leading-relaxed">
-                                Our team of designers and engineers are dedicated to pushing the boundaries of what's possible, integrating AI agents and sophisticated full-stack solutions into seamless user experiences.
-                            </p>
-                            <div className="grid grid-cols-2 gap-8">
-                                <div>
-                                    <h4 className="text-3xl font-serif font-bold gold-text-gradient">150+</h4>
-                                    <p className="text-sm text-white/50 uppercase tracking-widest">Projects Delivered</p>
-                                </div>
-                                <div>
-                                    <h4 className="text-3xl font-serif font-bold gold-text-gradient">12+</h4>
-                                    <p className="text-sm text-white/50 uppercase tracking-widest">AI Solutions</p>
-                                </div>
-                            </div>
-                        </motion.div>
-                        
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                            className="relative"
-                        >
-                            <div className="aspect-square rounded-2xl overflow-hidden border border-white/20 glass-card">
-                                <img 
-                                    src="https://picsum.photos/seed/studio/800/800" 
-                                    alt="Studio Workspace" 
-                                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 opacity-80"
-                                />
-                            </div>
-                            <div className="absolute -bottom-6 -left-6 p-8 glass-card rounded-2xl max-w-xs">
-                                <p className="italic text-white/90 font-serif">
-                                    "Design is not just what it looks like and feels like. Design is how it works."
-                                </p>
-                            </div>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-        );
-    };
-
-    const Services = () => {
-        const services = [
-            {
-                icon: <Icon name="Layout" className="text-gold icon-glow" size={32} />,
-                title: "UI/UX Design",
-                description: "User-centric interfaces that blend aesthetic elegance with intuitive functionality for maximum engagement."
-            },
-            {
-                icon: <Icon name="Cpu" className="text-gold icon-glow" size={32} />,
-                title: "AI Agent Development",
-                description: "Custom AI solutions and intelligent agents designed to automate workflows and enhance user interaction."
-            },
-            {
-                icon: <Icon name="Globe" className="text-gold icon-glow" size={32} />,
-                title: "Full-Stack Web Apps",
-                description: "Robust, scalable web applications built with modern frameworks to power your digital business."
-            }
-        ];
-
-        return (
-            <section id="services" className="py-24 relative">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Our Core <span className="gold-text-gradient">Capabilities</span></h2>
-                        <p className="text-white/50 max-w-xl mx-auto">Specialized services tailored for the modern digital landscape.</p>
-                    </div>
-                    
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {services.map((service, index) => (
-                            <motion.div
-                                key={service.title}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.2 }}
-                                className="p-10 rounded-3xl glass-card glass-card-hover group"
-                            >
-                                <div className="mb-6 p-4 rounded-2xl bg-white/5 w-fit group-hover:bg-white/10 transition-colors">
-                                    {service.icon}
-                                </div>
-                                <h3 className="text-2xl font-serif font-bold mb-4">{service.title}</h3>
-                                <p className="text-white/60 leading-relaxed">
-                                    {service.description}
-                                </p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        );
-    };
-
-    const Portfolio = () => {
-        const projects = [
-            { id: 1, title: "Luxe E-commerce", category: "UI/UX Design", img: "https://picsum.photos/seed/p1/600/800" },
-            { id: 2, title: "AI Analytics Dashboard", category: "AI Solutions", img: "https://picsum.photos/seed/p2/600/800" },
-            { id: 3, title: "Fintech Mobile App", category: "Full-Stack", img: "https://picsum.photos/seed/p3/600/800" },
-            { id: 4, title: "Modern Portfolio", category: "Web Design", img: "https://picsum.photos/seed/p4/600/800" },
-        ];
-
-        return (
-            <section id="portfolio" className="py-24 relative">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                        <div>
-                            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Recent <span className="gold-text-gradient">Works</span></h2>
-                            <p className="text-white/50">A glimpse into our creative journey.</p>
-                        </div>
-                        <a href="#" className="flex items-center gap-2 text-gold font-medium hover:gap-3 transition-all">
-                            View All Projects <Icon name="ArrowRight" size={18} />
-                        </a>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {projects.map((project, index) => (
-                            <motion.div
-                                key={project.id}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="relative group cursor-pointer overflow-hidden rounded-2xl aspect-[3/4] border border-white/10"
-                            >
-                                <img 
-                                    src={project.img} 
-                                    alt={project.title} 
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 backdrop-blur-[2px]">
-                                    <span className="text-gold text-xs font-bold uppercase tracking-widest mb-1">{project.category}</span>
-                                    <h4 className="text-xl font-serif font-bold text-white">{project.title}</h4>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        );
-    };
-
-    const Contact = () => {
-        return (
-            <section id="contact" className="py-24">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid lg:grid-cols-2 gap-16">
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                        >
-                            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">Let's <span className="gold-text-gradient">Connect</span></h2>
-                            <p className="text-white/60 mb-10 text-lg">
-                                Ready to transform your vision into reality? Reach out to us for a consultation or just to say hello.
-                            </p>
-                            
-                            <div className="space-y-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold">
-                                        <Icon name="Mail" size={20} />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-white/40 uppercase tracking-widest">Email Us</p>
-                                        <p className="text-lg font-medium">hello@shreedesign.studio</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold">
-                                        <Icon name="Phone" size={20} />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-white/40 uppercase tracking-widest">Call Us</p>
-                                        <p className="text-lg font-medium">+91 98765 43210</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold">
-                                        <Icon name="MapPin" size={20} />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-white/40 uppercase tracking-widest">Visit Us</p>
-                                        <p className="text-lg font-medium">Creative Hub, Mumbai, India</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div className="mt-12">
-                                <a 
-                                    href="https://wa.me/919876543210" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-white font-bold hover:scale-105 transition-transform"
-                                >
-                                    <Icon name="MessageSquare" size={20} />
-                                    Chat on WhatsApp
-                                </a>
-                            </div>
-                        </motion.div>
-                        
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="p-8 md:p-12 rounded-3xl glass-card glass-card-hover"
-                        >
-                            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-white/60">Full Name</label>
-                                        <input 
-                                            type="text" 
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-gold outline-none transition-colors backdrop-blur-sm"
-                                            placeholder="John Doe"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-white/60">Email Address</label>
-                                        <input 
-                                            type="email" 
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-gold outline-none transition-colors backdrop-blur-sm"
-                                            placeholder="john@example.com"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-white/60">Service Interested In</label>
-                                    <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-gold outline-none transition-colors appearance-none backdrop-blur-sm">
-                                        <option className="bg-charcoal">UI/UX Design</option>
-                                        <option className="bg-charcoal">AI Agent Development</option>
-                                        <option className="bg-charcoal">Full-Stack Web App</option>
-                                        <option className="bg-charcoal">Other</option>
-                                    </select>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-white/60">Your Message</label>
-                                    <textarea 
-                                        rows={4}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-gold outline-none transition-colors backdrop-blur-sm"
-                                        placeholder="Tell us about your project..."
-                                    />
-                                </div>
-                                <button 
-                                    type="submit" 
-                                    className="w-full py-4 rounded-xl gold-gradient text-charcoal font-bold text-lg hover:opacity-90 transition-opacity"
-                                >
-                                    Send Message
-                                </button>
-                            </form>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-        );
-    };
-
-    const Footer = () => {
-        return (
-            <footer className="py-12 border-t border-white/10 backdrop-blur-sm">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-                        <div className="text-center md:text-left">
-                            <a href="#" className="text-2xl font-serif font-bold gold-text-gradient mb-2 block">SHREE</a>
-                            <p className="text-white/40 text-sm">© 2026 Shree Design Studio. All rights reserved.</p>
-                        </div>
-                        
-                        <div className="flex items-center gap-6">
-                            <a href="#" className="text-white/40 hover:text-gold transition-colors"><Icon name="Twitter" size={20} /></a>
-                            <a href="#" className="text-white/40 hover:text-gold transition-colors"><Icon name="Instagram" size={20} /></a>
-                            <a href="#" className="text-white/40 hover:text-gold transition-colors"><Icon name="Linkedin" size={20} /></a>
-                        </div>
-                        
-                        <div className="flex items-center gap-8 text-sm font-medium text-white/40">
-                            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        );
-    };
-
-    const App = () => {
-        return (
-            <div className="min-h-screen">
-                <Navbar />
-                <main>
-                    <Hero />
-                    <About />
-                    <Services />
-                    <Portfolio />
-                    <Contact />
-                </main>
-                <Footer />
             </div>
-        );
-    };
+        </section>
+    );
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
-</script>
-</body>
-</html>Shree Design Studio
-Gemini
-​Role: Professional Full-Stack Web Developer.
-Project: Build a high-end, modern one-page website for "Shree Design Studio."
-Business Type: Creative Design & AI Solutions Agency.
-​Website Sections:
-​Hero Section: Bold heading "Shree Design Studio," a subheading "Innovative Design Meets AI Excellence," and a "Get Started" CTA button.
-​About Us: A clean section describing a studio focused on delivering premium digital products and AI agents.
-​Services Grid: Three cards: "UI/UX Design," "AI Agent Development," and "Full-Stack Web Apps."
-​Portfolio/Gallery: A placeholder grid for recent design projects.
-​Contact Section: A professional contact form and a WhatsApp button link.
-​Technical Requirements:
-​Use React and Tailwind CSS for a modern look.
-​Ensure the design is fully mobile-responsive (optimized for mobile screens).
-​Theme: Use a "Dark Mode" aesthetic with premium gold and charcoal accents.
-​Use Lucide icons for a professional touch.
-Gemini 3 Flash Preview
-Ran for 64s
-
-summarize_auto
-Action history
-chevron_right
-Here are key actions taken for the app:
-
-edit
-Edited 3 files
-metadata.json
-check_circle
-src/index.css
-check_circle
-src/App.tsx
-check_circle
-build
-Built
-I have built a high-end, modern one-page website for Shree Design Studio. The application features a premium "Dark Mode" aesthetic with charcoal and gold accents, utilizing React, Tailwind CSS, and motion for smooth, professional animations.
-Key Features:
-Premium Aesthetic: A custom theme using #121212 (Charcoal) and #D4AF37 (Gold) with glassmorphism effects.
-Hero Section: Features bold typography with a "Playfair Display" serif font and a clear "Get Started" call-to-action.
-About Us: A sophisticated section highlighting the studio's focus on digital products and AI agents, complete with animated stats.
-Services Grid: Interactive cards for UI/UX Design, AI Agent Development, and Full-Stack Web Apps, each paired with professional Lucide icons.
-Portfolio Gallery: A responsive grid for showcasing projects with elegant hover overlays.
-Contact Section: Includes a professional inquiry form and a direct WhatsApp integration for immediate communication.
-Fully Responsive: Optimized for all screen sizes, from mobile devices to large desktops.
-Technical Details:
-Typography: Uses Inter for clean body text and Playfair Display for elegant headings.
-Animations: Implemented motion for scroll-triggered entries and smooth transitions.
-Icons: Integrated lucide-react for a consistent, modern icon set.
-You can now view the live preview to explore the design. Let me know if you'd like to adjust any specific details!
-Checkpoint
-​"Update the website with a Glassmorphism aesthetic.
-​Change the background to a dark gradient (Deep Charcoal to Navy).
-​Make all cards and the navigation bar semi-transparent using backdrop-blur-md and bg-white/10.
-​Add a thin, subtle border (border-white/20) to all glass elements.
-​Change the 'Our Expertise' section: Rename it to 'Our Core Capabilities'. Use a 3-column grid with glowing icons. Add a hover effect where the glass card brightens when touched."
-Gemini 3 Flash Preview
-Ran for 86s
-
-summarize_auto
-Action history
-chevron_right
-Here are key actions taken for the app:
-
-edit
-Edited 2 files
-src/index.css
-check_circle
-src/App.tsx
-check_circle
-build
-Built
-I have updated Shree Design Studio with a sophisticated Glassmorphism aesthetic.
-Key Updates:
-Atmospheric Background: Changed to a deep charcoal to navy dark gradient (linear-gradient(135deg, #121212 0%, #0A0F1E 100%)) with fixed attachment for a sense of depth.
-Glassmorphism Elements:
-The Navigation Bar and all Cards are now semi-transparent using backdrop-blur-md and bg-white/10.
-Added a subtle border-white/20 to all glass elements to define their edges.
-Core Capabilities Section:
-Renamed from "Our Expertise" to "Our Core Capabilities".
-Icons now feature a glowing effect (icon-glow) for a high-tech feel.
-Added a brightening hover effect (glass-card-hover) where cards become more opaque and borders more defined when touched.
-Enhanced Visuals:
-Form inputs and textareas now use semi-transparent backgrounds with backdrop blur.
-Portfolio items feature a subtle backdrop blur on their info overlays.
-The footer now includes a backdrop blur for a cohesive finish.
-The website now feels more immersive and modern, perfectly aligning with a creative and AI-focused agency. You can see the changes in the live preview!
-Checkpoint
-​"Convert the Shree Design Studio code into a single index.html file using CDN links for Tailwind CSS and Lucide icons. Make sure all CSS and JavaScript are inside this one file so I can upload it directly to GitHub."
-Gemini 3 Flash Preview
-Ran for 69s
-
-summarize_auto
-Action history
-chevron_right
-Here are key actions taken for the app:
-
-edit
-Edited 1 file
-index.html
-check_circle
-build
-Built
-I have converted the Shree Design Studio website into a single, standalone index.html file. This file is fully self-contained and ready to be uploaded directly to GitHub or hosted on GitHub Pages.
-Key Features of the Standalone File:
-Zero Dependencies: All libraries are loaded via reliable CDNs (React, ReactDOM, Babel, Tailwind CSS, Framer Motion, and Lucide Icons).
-Embedded Styles: All custom CSS, including the Glassmorphism effects, gold gradients, and dark navy background, are included in a <style> tag.
-Embedded Logic: The entire React application logic, including navigation, animations, and the contact form, is contained within a <script type="text/babel"> tag.
-Lucide Icon Helper: I've included a custom Icon component that dynamically renders Lucide icons from the CDN library, ensuring they work perfectly in a browser environment.
-Responsive Design: The single-file version retains all the mobile-responsive features of the original project.
-How to Use:
-Download/Copy: You can copy the content of the root index.html file.
-Upload to GitHub: Create a new repository on GitHub and upload this index.html file.
-GitHub Pages: Go to your repository settings, enable GitHub Pages, and select the branch where you uploaded the file. Your site will be live at https://<your-username>.github.io/<repo-name>/.
-You can now view the standalone version in the live preview! Let me know if you need any further adjustments.
-Checkpoint
-Fix the following errors:
-code
-Code
-Uncaught ReferenceError: FramerMotion is not defined
-Gemini 3 Flash Preview
-Ran for 28s
-lightbulb
-Thought for 13 seconds
-edit
-Edited 1 file
-index.html
-check_circle
-grading
-Ran quality control
-I have fixed the ReferenceError: FramerMotion is not defined in the standalone index.html file.
-Changes Made:
-Updated CDN: Switched to a more reliable jsdelivr link for Framer Motion.
-Corrected Global Variable: Changed the reference from FramerMotion to Motion, which is the correct global object exported by the library when loaded via a script tag.
-The standalone file should now load and animate correctly in any browser. You can test it again in the live preview!
-Checkpoint
-Checkpoint
-​"Give me the full code for the Shree Design Studio website in a single block of plain text. Start with <!DOCTYPE html> and include all Tailwind CSS and Glassmorphism styles inside. No zip files, just text."
-Gemini 3 Flash Preview
-Ran for 33s
-description
-Read file
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shree Design Studio | Innovative Design Meets AI Excellence</title>
-code
-Code
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com"></script>
-
-<!-- React & Babel -->
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-<!-- Framer Motion -->
-<script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.js"></script>
-
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                fontFamily: {
-                    sans: ["Inter", "sans-serif"],
-                    serif: ["Playfair Display", "serif"],
-                },
-                colors: {
-                    charcoal: '#121212',
-                    'charcoal-light': '#1E1E1E',
-                    'navy-dark': '#0A0F1E',
-                    gold: '#D4AF37',
-                    'gold-light': '#F1D592',
-                    'gold-dark': '#A68926',
-                },
-            }
-        }
-    }
-</script>
-
-<style type="text/css">
-    body {
-        background: linear-gradient(135deg, #121212 0%, #0A0F1E 100%);
-        background-attachment: fixed;
-        color: white;
-        font-family: 'Inter', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        min-height: 100vh;
-    }
-    
-    h1, h2, h3, h4 {
-        font-family: 'Playfair Display', serif;
-    }
-
-    .gold-gradient {
-        background: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #A68926 100%);
-    }
-
-    .gold-text-gradient {
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        background-image: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #A68926 100%);
-    }
-
-    .glass-card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .glass-card-hover {
-        transition: all 0.3s ease;
-    }
-    .glass-card-hover:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .icon-glow {
-        filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-        background: #121212;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #D4AF37;
-        border-radius: 10px;
-    }
-</style>
-</head>
-<body>
-<div id="root"></div>
-code
-Code
-<script type="text/babel">
-    const { useState, useEffect, useRef } = React;
-    const { motion, AnimatePresence } = Motion;
-
-    // Helper to use Lucide icons in React
-    const Icon = ({ name, size = 24, className = "" }) => {
-        const iconRef = useRef(null);
-        
-        useEffect(() => {
-            if (iconRef.current) {
-                const icon = lucide.icons[name];
-                if (icon) {
-                    const svg = lucide.createIcons({
-                        icons: { [name]: icon },
-                        attrs: {
-                            stroke: "currentColor",
-                            "stroke-width": 2,
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round",
-                            width: size,
-                            height: size,
-                            class: className
-                        }
-                    });
-                }
-            }
-        }, [name, size, className]);
-
-        return <i ref={iconRef} data-lucide={name} className={className}></i>;
-    };
-
-    const Navbar = () => {
-        const [isScrolled, setIsScrolled] = useState(false);
-        const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-        useEffect(() => {
-            const handleScroll = () => setIsScrolled(window.scrollY > 50);
-            window.addEventListener('scroll', handleScroll);
-            return () => window.removeEventListener('scroll', handleScroll);
-        }, []);
-
-        const navLinks = [
-            { name: 'About', href: '#about' },
-            { name: 'Services', href: '#services' },
-            { name: 'Portfolio', href: '#portfolio' },
-            { name: 'Contact', href: '#contact' },
-        ];
-
-        return (
-            <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/10 backdrop-blur-md py-4 border-b border-white/20' : 'bg-transparent py-6'}`}>
-                <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-                    <a href="#" className="text-2xl font-serif font-bold gold-text-gradient tracking-tighter">
-                        SHREE
-                    </a>
-
-                    <div className="hidden md:flex items-center space-x-8">
-                        {navLinks.map((link) => (
-                            <a 
-                                key={link.name} 
-                                href={link.href} 
-                                className="text-sm font-medium text-white/70 hover:text-gold transition-colors"
-                            >
-                                {link.name}
-                            </a>
-                        ))}
-                        <a 
-                            href="#contact" 
-                            className="px-5 py-2 rounded-full border border-gold/50 text-gold text-sm font-medium hover:bg-gold hover:text-charcoal transition-all duration-300"
-                        >
-                            Get Started
-                        </a>
-                    </div>
-
-                    <button 
-                        className="md:hidden text-white"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    >
-                        {isMobileMenuOpen ? <Icon name="X" /> : <Icon name="Menu" />}
-                    </button>
-                </div>
-
-                <AnimatePresence>
-                    {isMobileMenuOpen && (
-                        <motion.div 
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="absolute top-full left-0 w-full bg-charcoal/95 backdrop-blur-xl border-b border-white/20 p-6 md:hidden"
-                        >
-                            <div className="flex flex-col space-y-4">
-                                {navLinks.map((link) => (
-                                    <a 
-                                        key={link.name} 
-                                        href={link.href} 
-                                        className="text-lg font-medium text-white/80"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                    >
-                                        {link.name}
-                                    </a>
-                                ))}
-                                <a 
-                                    href="#contact" 
-                                    className="w-full py-3 rounded-lg gold-gradient text-charcoal text-center font-bold"
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                    Get Started
-                                </a>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </nav>
-        );
-    };
-
-    const Hero = () => {
-        return (
-            <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-                <div className="absolute top-1/4 -left-20 w-96 h-96 bg-gold/10 rounded-full blur-[120px]" />
-                <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-navy-dark/40 rounded-full blur-[120px]" />
-                
-                <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <span className="inline-block py-1 px-4 rounded-full border border-gold/30 text-gold text-xs font-bold tracking-widest uppercase mb-6">
-                            Creative Design & AI Agency
-                        </span>
-                        <h1 className="text-6xl md:text-8xl font-serif font-bold mb-6 leading-tight">
-                            Shree <span className="gold-text-gradient italic">Design</span> Studio
-                        </h1>
-                        <p className="text-xl md:text-2xl text-white/60 max-w-2xl mx-auto mb-10 font-light">
-                            Innovative Design Meets AI Excellence. We craft premium digital experiences that define the future.
+    const About = () => (
+        <section id="about" className="py-24 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="grid md:grid-cols-2 gap-16 items-center">
+                    <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+                        <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">
+                            Crafting the <span className="gold-text-gradient">Digital Future</span>
+                        </h2>
+                        <p className="text-lg text-white/70 mb-6 leading-relaxed">
+                            Shree Design Studio is a boutique creative agency where artistry meets cutting-edge technology. We specialize in delivering premium digital products that perform exceptionally.
                         </p>
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <a 
-                                href="#contact" 
-                                className="group px-8 py-4 rounded-full gold-gradient text-charcoal font-bold text-lg flex items-center gap-2 hover:scale-105 transition-transform"
-                            >
-                                Get Started
-                                <Icon name="ChevronRight" size={20} className="group-hover:translate-x-1 transition-transform" />
-                            </a>
-                            <a 
-                                href="#portfolio" 
-                                className="px-8 py-4 rounded-full border border-white/20 text-white font-medium text-lg hover:bg-white/5 transition-colors"
-                            >
-                                View Portfolio
-                            </a>
-                        </div>
                     </motion.div>
-                </div>
-                
-                <motion.div 
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/30"
-                >
-                    <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center p-1">
-                        <div className="w-1 h-2 bg-gold rounded-full" />
-                    </div>
-                </motion.div>
-            </section>
-        );
-    };
-
-    const About = () => {
-        return (
-            <section id="about" className="py-24 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid md:grid-cols-2 gap-16 items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">
-                                Crafting the <span className="gold-text-gradient">Digital Future</span>
-                            </h2>
-                            <p className="text-lg text-white/70 mb-6 leading-relaxed">
-                                Shree Design Studio is a boutique creative agency where artistry meets cutting-edge technology. We specialize in delivering premium digital products that don't just look beautiful but perform exceptionally.
-                            </p>
-                            <p className="text-lg text-white/70 mb-8 leading-relaxed">
-                                Our team of designers and engineers are dedicated to pushing the boundaries of what's possible, integrating AI agents and sophisticated full-stack solutions into seamless user experiences.
-                            </p>
-                            <div className="grid grid-cols-2 gap-8">
-                                <div>
-                                    <h4 className="text-3xl font-serif font-bold gold-text-gradient">150+</h4>
-                                    <p className="text-sm text-white/50 uppercase tracking-widest">Projects Delivered</p>
-                                </div>
-                                <div>
-                                    <h4 className="text-3xl font-serif font-bold gold-text-gradient">12+</h4>
-                                    <p className="text-sm text-white/50 uppercase tracking-widest">AI Solutions</p>
-                                </div>
-                            </div>
-                        </motion.div>
-                        
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                            className="relative"
-                        >
-                            <div className="aspect-square rounded-2xl overflow-hidden border border-white/20 glass-card">
-                                <img 
-                                    src="https://picsum.photos/seed/studio/800/800" 
-                                    alt="Studio Workspace" 
-                                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 opacity-80"
-                                />
-                            </div>
-                            <div className="absolute -bottom-6 -left-6 p-8 glass-card rounded-2xl max-w-xs">
-                                <p className="italic text-white/90 font-serif">
-                                    "Design is not just what it looks like and feels like. Design is how it works."
-                                </p>
-                            </div>
-                        </motion.div>
+                    <div className="aspect-square rounded-2xl overflow-hidden border border-white/20 glass-card">
+                        <img src="https://picsum.photos/seed/studio/800/800" className="w-full h-full object-cover grayscale opacity-80" />
                     </div>
                 </div>
-            </section>
-        );
-    };
-
-    const Services = () => {
-        const services = [
-            {
-                icon: <Icon name="Layout" className="text-gold icon-glow" size={32} />,
-                title: "UI/UX Design",
-                description: "User-centric interfaces that blend aesthetic elegance with intuitive functionality for maximum engagement."
-            },
-            {
-                icon: <Icon name="Cpu" className="text-gold icon-glow" size={32} />,
-                title: "AI Agent Development",
-                description: "Custom AI solutions and intelligent agents designed to automate workflows and enhance user interaction."
-            },
-            {
-                icon: <Icon name="Globe" className="text-gold icon-glow" size={32} />,
-                title: "Full-Stack Web Apps",
-                description: "Robust, scalable web applications built with modern frameworks to power your digital business."
-            }
-        ];
-
-        return (
-            <section id="services" className="py-24 relative">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Our Core <span className="gold-text-gradient">Capabilities</span></h2>
-                        <p className="text-white/50 max-w-xl mx-auto">Specialized services tailored for the modern digital landscape.</p>
-                    </div>
-                    
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {services.map((service, index) => (
-                            <motion.div
-                                key={service.title}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.2 }}
-                                className="p-10 rounded-3xl glass-card glass-card-hover group"
-                            >
-                                <div className="mb-6 p-4 rounded-2xl bg-white/5 w-fit group-hover:bg-white/10 transition-colors">
-                                    {service.icon}
-                                </div>
-                                <h3 className="text-2xl font-serif font-bold mb-4">{service.title}</h3>
-                                <p className="text-white/60 leading-relaxed">
-                                    {service.description}
-                                </p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        );
-    };
-
-    const Portfolio = () => {
-        const projects = [
-            { id: 1, title: "Luxe E-commerce", category: "UI/UX Design", img: "https://picsum.photos/seed/p1/600/800" },
-            { id: 2, title: "AI Analytics Dashboard", category: "AI Solutions", img: "https://picsum.photos/seed/p2/600/800" },
-            { id: 3, title: "Fintech Mobile App", category: "Full-Stack", img: "https://picsum.photos/seed/p3/600/800" },
-            { id: 4, title: "Modern Portfolio", category: "Web Design", img: "https://picsum.photos/seed/p4/600/800" },
-        ];
-
-        return (
-            <section id="portfolio" className="py-24 relative">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                        <div>
-                            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Recent <span className="gold-text-gradient">Works</span></h2>
-                            <p className="text-white/50">A glimpse into our creative journey.</p>
-                        </div>
-                        <a href="#" className="flex items-center gap-2 text-gold font-medium hover:gap-3 transition-all">
-                            View All Projects <Icon name="ArrowRight" size={18} />
-                        </a>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {projects.map((project, index) => (
-                            <motion.div
-                                key={project.id}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="relative group cursor-pointer overflow-hidden rounded-2xl aspect-[3/4] border border-white/10"
-                            >
-                                <img 
-                                    src={project.img} 
-                                    alt={project.title} 
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 backdrop-blur-[2px]">
-                                    <span className="text-gold text-xs font-bold uppercase tracking-widest mb-1">{project.category}</span>
-                                    <h4 className="text-xl font-serif font-bold text-white">{project.title}</h4>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        );
-    };
-
-    const Contact = () => {
-        return (
-            <section id="contact" className="py-24">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid lg:grid-cols-2 gap-16">
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                        >
-                            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">Let's <span className="gold-text-gradient">Connect</span></h2>
-                            <p className="text-white/60 mb-10 text-lg">
-                                Ready to transform your vision into reality? Reach out to us for a consultation or just to say hello.
-                            </p>
-                            
-                            <div className="space-y-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold">
-                                        <Icon name="Mail" size={20} />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-white/40 uppercase tracking-widest">Email Us</p>
-                                        <p className="text-lg font-medium">hello@shreedesign.studio</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold">
-                                        <Icon name="Phone" size={20} />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-white/40 uppercase tracking-widest">Call Us</p>
-                                        <p className="text-lg font-medium">+91 98765 43210</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold">
-                                        <Icon name="MapPin" size={20} />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-white/40 uppercase tracking-widest">Visit Us</p>
-                                        <p className="text-lg font-medium">Creative Hub, Mumbai, India</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div className="mt-12">
-                                <a 
-                                    href="https://wa.me/919876543210" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-white font-bold hover:scale-105 transition-transform"
-                                >
-                                    <Icon name="MessageSquare" size={20} />
-                                    Chat on WhatsApp
-                                </a>
-                            </div>
-                        </motion.div>
-                        
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="p-8 md:p-12 rounded-3xl glass-card glass-card-hover"
-                        >
-                            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-white/60">Full Name</label>
-                                        <input 
-                                            type="text" 
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-gold outline-none transition-colors backdrop-blur-sm"
-                                            placeholder="John Doe"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-white/60">Email Address</label>
-                                        <input 
-                                            type="email" 
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-gold outline-none transition-colors backdrop-blur-sm"
-                                            placeholder="john@example.com"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-white/60">Service Interested In</label>
-                                    <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-gold outline-none transition-colors appearance-none backdrop-blur-sm">
-                                        <option className="bg-charcoal">UI/UX Design</option>
-                                        <option className="bg-charcoal">AI Agent Development</option>
-                                        <option className="bg-charcoal">Full-Stack Web App</option>
-                                        <option className="bg-charcoal">Other</option>
-                                    </select>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-white/60">Your Message</label>
-                                    <textarea 
-                                        rows={4}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-gold outline-none transition-colors backdrop-blur-sm"
-                                        placeholder="Tell us about your project..."
-                                    />
-                                </div>
-                                <button 
-                                    type="submit" 
-                                    className="w-full py-4 rounded-xl gold-gradient text-charcoal font-bold text-lg hover:opacity-90 transition-opacity"
-                                >
-                                    Send Message
-                                </button>
-                            </form>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-        );
-    };
-
-    const Footer = () => {
-        return (
-            <footer className="py-12 border-t border-white/10 backdrop-blur-sm">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-                        <div className="text-center md:text-left">
-                            <a href="#" className="text-2xl font-serif font-bold gold-text-gradient mb-2 block">SHREE</a>
-                            <p className="text-white/40 text-sm">© 2026 Shree Design Studio. All rights reserved.</p>
-                        </div>
-                        
-                        <div className="flex items-center gap-6">
-                            <a href="#" className="text-white/40 hover:text-gold transition-colors"><Icon name="Twitter" size={20} /></a>
-                            <a href="#" className="text-white/40 hover:text-gold transition-colors"><Icon name="Instagram" size={20} /></a>
-                            <a href="#" className="text-white/40 hover:text-gold transition-colors"><Icon name="Linkedin" size={20} /></a>
-                        </Shree Design Studio
-index.html
-check_circle
-grading
-Ran quality control
-I have fixed the ReferenceError: FramerMotion is not defined in the standalone index.html file.
-Changes Made:
-Updated CDN: Switched to a more reliable jsdelivr link for Framer Motion.
-Corrected Global Variable: Changed the reference from FramerMotion to Motion, which is the correct global object exported by the library when loaded via a script tag.
-The standalone file should now load and animate correctly in any browser. You can test it again in the live preview!
-Checkpoint
-Checkpoint
-​"Give me the full code for the Shree Design Studio website in a single block of plain text. Start with <!DOCTYPE html> and include all Tailwind CSS and Glassmorphism styles inside. No zip files, just text."
-Gemini 3 Flash Preview
-Ran for 33s
-description
-Read file
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shree Design Studio | Innovative Design Meets AI Excellence</title>
-code
-Code
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com"></script>
-
-<!-- React & Babel -->
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-<!-- Framer Motion -->
-<script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.js"></script>
-
-<!-- Lucide Icons -->
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                fontFamily: {
-                    sans: ["Inter", "sans-serif"],
-                    serif: ["Playfair Display", "serif"],
-                },
-                colors: {
-                    charcoal: '#121212',
-                    'charcoal-light': '#1E1E1E',
-                    'navy-dark': '#0A0F1E',
-                    gold: '#D4AF37',
-                    'gold-light': '#F1D592',
-                    'gold-dark': '#A68926',
-                },
-            }
-        }
-    }
-</script>
-
-<style type="text/css">
-    body {
-        background: linear-gradient(135deg, #121212 0%, #0A0F1E 100%);
-        background-attachment: fixed;
-        color: white;
-        font-family: 'Inter', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        min-height: 100vh;
-    }
-    
-    h1, h2, h3, h4 {
-        font-family: 'Playfair Display', serif;
-    }
-
-    .gold-gradient {
-        background: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #A68926 100%);
-    }
-
-    .gold-text-gradient {
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        background-image: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #A68926 100%);
-    }
-
-    .glass-card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .glass-card-hover {
-        transition: all 0.3s ease;
-    }
-    .glass-card-hover:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    .icon-glow {
-        filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-        background: #121212;
-    }
-    ::-webkit-scrollbar-thumb {
-        background: #D4AF37;
-        border-radius: 10px;
-    }
-</style>
-</head>
-<body>
-<div id="root"></div>
-code
-Code
-<script type="text/babel">
-    const { useState, useEffect, useRef } = React;
-    const { motion, AnimatePresence } = Motion;
-
-    // Helper to use Lucide icons in React
-    const Icon = ({ name, size = 24, className = "" }) => {
-        const iconRef = useRef(null);
-        
-        useEffect(() => {
-            if (iconRef.current) {
-                const icon = lucide.icons[name];
-                if (icon) {
-                    const svg = lucide.createIcons({
-                        icons: { [name]: icon },
-                        attrs: {
-                            stroke: "currentColor",
-                            "stroke-width": 2,
-                            "stroke-linecap": "round",
-                            "stroke-linejoin": "round",
-                            width: size,
-                            height: size,
-                            class: className
-                        }
-                    });
-                }
-            }
-        }, [name, size, className]);
-
-        return <i ref={iconRef} data-lucide={name} className={className}></i>;
-    };
-
-    const Navbar = () => {
-        const [isScrolled, setIsScrolled] = useState(false);
-        const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-        useEffect(() => {
-            const handleScroll = () => setIsScrolled(window.scrollY > 50);
-            window.addEventListener('scroll', handleScroll);
-            return () => window.removeEventListener('scroll', handleScroll);
-        }, []);
-
-        const navLinks = [
-            { name: 'About', href: '#about' },
-            { name: 'Services', href: '#services' },
-            { name: 'Portfolio', href: '#portfolio' },
-            { name: 'Contact', href: '#contact' },
-        ];
-
-        return (
-            <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/10 backdrop-blur-md py-4 border-b border-white/20' : 'bg-transparent py-6'}`}>
-                <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-                    <a href="#" className="text-2xl font-serif font-bold gold-text-gradient tracking-tighter">
-                        SHREE
-                    </a>
-
-                    <div className="hidden md:flex items-center space-x-8">
-                        {navLinks.map((link) => (
-                            <a 
-                                key={link.name} 
-                                href={link.href} 
-                                className="text-sm font-medium text-white/70 hover:text-gold transition-colors"
-                            >
-                                {link.name}
-                            </a>
-                        ))}
-                        <a 
-                            href="#contact" 
-                            className="px-5 py-2 rounded-full border border-gold/50 text-gold text-sm font-medium hover:bg-gold hover:text-charcoal transition-all duration-300"
-                        >
-                            Get Started
-                        </a>
-                    </div>
-
-                    <button 
-                        className="md:hidden text-white"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    >
-                        {isMobileMenuOpen ? <Icon name="X" /> : <Icon name="Menu" />}
-                    </button>
-                </div>
-
-                <AnimatePresence>
-                    {isMobileMenuOpen && (
-                        <motion.div 
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            className="absolute top-full left-0 w-full bg-charcoal/95 backdrop-blur-xl border-b border-white/20 p-6 md:hidden"
-                        >
-                            <div className="flex flex-col space-y-4">
-                                {navLinks.map((link) => (
-                                    <a 
-                                        key={link.name} 
-                                        href={link.href} 
-                                        className="text-lg font-medium text-white/80"
-                                        onClick={() => setIsMobileMenuOpen(false)}
-                                    >
-                                        {link.name}
-                                    </a>
-                                ))}
-                                <a 
-                                    href="#contact" 
-                                    className="w-full py-3 rounded-lg gold-gradient text-charcoal text-center font-bold"
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                >
-                                    Get Started
-                                </a>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </nav>
-        );
-    };
-
-    const Hero = () => {
-        return (
-            <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-                <div className="absolute top-1/4 -left-20 w-96 h-96 bg-gold/10 rounded-full blur-[120px]" />
-                <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-navy-dark/40 rounded-full blur-[120px]" />
-                
-                <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <span className="inline-block py-1 px-4 rounded-full border border-gold/30 text-gold text-xs font-bold tracking-widest uppercase mb-6">
-                            Creative Design & AI Agency
-                        </span>
-                        <h1 className="text-6xl md:text-8xl font-serif font-bold mb-6 leading-tight">
-                            Shree <span className="gold-text-gradient italic">Design</span> Studio
-                        </h1>
-                        <p className="text-xl md:text-2xl text-white/60 max-w-2xl mx-auto mb-10 font-light">
-                            Innovative Design Meets AI Excellence. We craft premium digital experiences that define the future.
-                        </p>
-                        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <a 
-                                href="#contact" 
-                                className="group px-8 py-4 rounded-full gold-gradient text-charcoal font-bold text-lg flex items-center gap-2 hover:scale-105 transition-transform"
-                            >
-                                Get Started
-                                <Icon name="ChevronRight" size={20} className="group-hover:translate-x-1 transition-transform" />
-                            </a>
-                            <a 
-                                href="#portfolio" 
-                                className="px-8 py-4 rounded-full border border-white/20 text-white font-medium text-lg hover:bg-white/5 transition-colors"
-                            >
-                                View Portfolio
-                            </a>
-                        </div>
-                    </motion.div>
-                </div>
-                
-                <motion.div 
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/30"
-                >
-                    <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center p-1">
-                        <div className="w-1 h-2 bg-gold rounded-full" />
-                    </div>
-                </motion.div>
-            </section>
-        );
-    };
-
-    const About = () => {
-        return (
-            <section id="about" className="py-24 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid md:grid-cols-2 gap-16 items-center">
-                        <motion.div
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">
-                                Crafting the <span className="gold-text-gradient">Digital Future</span>
-                            </h2>
-                            <p className="text-lg text-white/70 mb-6 leading-relaxed">
-                                Shree Design Studio is a boutique creative agency where artistry meets cutting-edge technology. We specialize in delivering premium digital products that don't just look beautiful but perform exceptionally.
-                            </p>
-                            <p className="text-lg text-white/70 mb-8 leading-relaxed">
-                                Our team of designers and engineers are dedicated to pushing the boundaries of what's possible, integrating AI agents and sophisticated full-stack solutions into seamless user experiences.
-                            </p>
-                            <div className="grid grid-cols-2 gap-8">
-                                <div>
-                                    <h4 className="text-3xl font-serif font-bold gold-text-gradient">150+</h4>
-                                    <p className="text-sm text-white/50 uppercase tracking-widest">Projects Delivered</p>
-                                </div>
-                                <div>
-                                    <h4 className="text-3xl font-serif font-bold gold-text-gradient">12+</h4>
-                                    <p className="text-sm text-white/50 uppercase tracking-widest">AI Solutions</p>
-                                </div>
-                            </div>
-                        </motion.div>
-                        
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                            className="relative"
-                        >
-                            <div className="aspect-square rounded-2xl overflow-hidden border border-white/20 glass-card">
-                                <img 
-                                    src="https://picsum.photos/seed/studio/800/800" 
-                                    alt="Studio Workspace" 
-                                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 opacity-80"
-                                />
-                            </div>
-                            <div className="absolute -bottom-6 -left-6 p-8 glass-card rounded-2xl max-w-xs">
-                                <p className="italic text-white/90 font-serif">
-                                    "Design is not just what it looks like and feels like. Design is how it works."
-                                </p>
-                            </div>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-        );
-    };
-
-    const Services = () => {
-        const services = [
-            {
-                icon: <Icon name="Layout" className="text-gold icon-glow" size={32} />,
-                title: "UI/UX Design",
-                description: "User-centric interfaces that blend aesthetic elegance with intuitive functionality for maximum engagement."
-            },
-            {
-                icon: <Icon name="Cpu" className="text-gold icon-glow" size={32} />,
-                title: "AI Agent Development",
-                description: "Custom AI solutions and intelligent agents designed to automate workflows and enhance user interaction."
-            },
-            {
-                icon: <Icon name="Globe" className="text-gold icon-glow" size={32} />,
-                title: "Full-Stack Web Apps",
-                description: "Robust, scalable web applications built with modern frameworks to power your digital business."
-            }
-        ];
-
-        return (
-            <section id="services" className="py-24 relative">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Our Core <span className="gold-text-gradient">Capabilities</span></h2>
-                        <p className="text-white/50 max-w-xl mx-auto">Specialized services tailored for the modern digital landscape.</p>
-                    </div>
-                    
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {services.map((service, index) => (
-                            <motion.div
-                                key={service.title}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.2 }}
-                                className="p-10 rounded-3xl glass-card glass-card-hover group"
-                            >
-                                <div className="mb-6 p-4 rounded-2xl bg-white/5 w-fit group-hover:bg-white/10 transition-colors">
-                                    {service.icon}
-                                </div>
-                                <h3 className="text-2xl font-serif font-bold mb-4">{service.title}</h3>
-                                <p className="text-white/60 leading-relaxed">
-                                    {service.description}
-                                </p>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        );
-    };
-
-    const Portfolio = () => {
-        const projects = [
-            { id: 1, title: "Luxe E-commerce", category: "UI/UX Design", img: "https://picsum.photos/seed/p1/600/800" },
-            { id: 2, title: "AI Analytics Dashboard", category: "AI Solutions", img: "https://picsum.photos/seed/p2/600/800" },
-            { id: 3, title: "Fintech Mobile App", category: "Full-Stack", img: "https://picsum.photos/seed/p3/600/800" },
-            { id: 4, title: "Modern Portfolio", category: "Web Design", img: "https://picsum.photos/seed/p4/600/800" },
-        ];
-
-        return (
-            <section id="portfolio" className="py-24 relative">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                        <div>
-                            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Recent <span className="gold-text-gradient">Works</span></h2>
-                            <p className="text-white/50">A glimpse into our creative journey.</p>
-                        </div>
-                        <a href="#" className="flex items-center gap-2 text-gold font-medium hover:gap-3 transition-all">
-                            View All Projects <Icon name="ArrowRight" size={18} />
-                        </a>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {projects.map((project, index) => (
-                            <motion.div
-                                key={project.id}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="relative group cursor-pointer overflow-hidden rounded-2xl aspect-[3/4] border border-white/10"
-                            >
-                                <img 
-                                    src={project.img} 
-                                    alt={project.title} 
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 backdrop-blur-[2px]">
-                                    <span className="text-gold text-xs font-bold uppercase tracking-widest mb-1">{project.category}</span>
-                                    <h4 className="text-xl font-serif font-bold text-white">{project.title}</h4>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        );
-    };
-
-    const Contact = () => {
-        return (
-            <section id="contact" className="py-24">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="grid lg:grid-cols-2 gap-16">
-                        <motion.div
-                            initial={{ opacity: 0, x: -30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                        >
-                            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">Let's <span className="gold-text-gradient">Connect</span></h2>
-                            <p className="text-white/60 mb-10 text-lg">
-                                Ready to transform your vision into reality? Reach out to us for a consultation or just to say hello.
-                            </p>
-                            
-                            <div className="space-y-6">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold">
-                                        <Icon name="Mail" size={20} />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-white/40 uppercase tracking-widest">Email Us</p>
-                                        <p className="text-lg font-medium">hello@shreedesign.studio</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold">
-                                        <Icon name="Phone" size={20} />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-white/40 uppercase tracking-widest">Call Us</p>
-                                        <p className="text-lg font-medium">+91 98765 43210</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold">
-                                        <Icon name="MapPin" size={20} />
-                                    </div>
-                                    <div>
-                                        <p className="text-xs text-white/40 uppercase tracking-widest">Visit Us</p>
-                                        <p className="text-lg font-medium">Creative Hub, Mumbai, India</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div className="mt-12">
-                                <a 
-                                    href="https://wa.me/919876543210" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-white font-bold hover:scale-105 transition-transform"
-                                >
-                                    <Icon name="MessageSquare" size={20} />
-                                    Chat on WhatsApp
-                                </a>
-                            </div>
-                        </motion.div>
-                        
-                        <motion.div
-                            initial={{ opacity: 0, x: 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="p-8 md:p-12 rounded-3xl glass-card glass-card-hover"
-                        >
-                            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                                <div className="grid md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-white/60">Full Name</label>
-                                        <input 
-                                            type="text" 
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-gold outline-none transition-colors backdrop-blur-sm"
-                                            placeholder="John Doe"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium text-white/60">Email Address</label>
-                                        <input 
-                                            type="email" 
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-gold outline-none transition-colors backdrop-blur-sm"
-                                            placeholder="john@example.com"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-white/60">Service Interested In</label>
-                                    <select className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-gold outline-none transition-colors appearance-none backdrop-blur-sm">
-                                        <option className="bg-charcoal">UI/UX Design</option>
-                                        <option className="bg-charcoal">AI Agent Development</option>
-                                        <option className="bg-charcoal">Full-Stack Web App</option>
-                                        <option className="bg-charcoal">Other</option>
-                                    </select>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-white/60">Your Message</label>
-                                    <textarea 
-                                        rows={4}
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus:border-gold outline-none transition-colors backdrop-blur-sm"
-                                        placeholder="Tell us about your project..."
-                                    />
-                                </div>
-                                <button 
-                                    type="submit" 
-                                    className="w-full py-4 rounded-xl gold-gradient text-charcoal font-bold text-lg hover:opacity-90 transition-opacity"
-                                >
-                                    Send Message
-                                </button>
-                            </form>
-                        </motion.div>
-                    </div>
-                </div>
-            </section>
-        );
-    };
-
-    const Footer = () => {
-        return (
-            <footer className="py-12 border-t border-white/10 backdrop-blur-sm">
-                <div className="max-w-7xl mx-auto px-6">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-                        <div className="text-center md:text-left">
-                            <a href="#" className="text-2xl font-serif font-bold gold-text-gradient mb-2 block">SHREE</a>
-                            <p className="text-white/40 text-sm">© 2026 Shree Design Studio. All rights reserved.</p>
-                        </div>
-                        
-                        <div className="flex items-center gap-6">
-                            <a href="#" className="text-white/40 hover:text-gold transition-colors"><Icon name="Twitter" size={20} /></a>
-                            <a href="#" className="text-white/40 hover:text-gold transition-colors"><Icon name="Instagram" size={20} /></a>
-                            <a href="#" className="text-white/40 hover:text-gold transition-colors"><Icon name="Linkedin" size={20} /></a>
-                        </div>
-                        
-                        <div className="flex items-center gap-8 text-sm font-medium text-white/40">
-                            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        );
-    };
-
-    const App = () => {
-        return (
-            <div className="min-h-screen">
-                <Navbar />
-                <main>
-                    <Hero />
-                    <About />
-                    <Services />
-                    <Portfolio />
-                    <Contact />
-                </main>
-                <Footer />
             </div>
-        );
-    };
+        </section>
+    );
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
-</script>
-</body>
-</html>                        
-                        <div className="flex items-center gap-8 text-sm font-medium text-white/40">
-                            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+    const Services = () => (
+        <section id="services" className="py-24 relative">
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="text-center mb-16">
+                    <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Our Core <span className="gold-text-gradient">Capabilities</span></h2>
+                </div>
+                <div className="grid md:grid-cols-3 gap-8 text-center">
+                    {[1, 2, 3].map((i) => (
+                        <div key={i} className="p-10 rounded-3xl glass-card flex flex-col items-center justify-center min-h-[250px]">
+                            <h3 className="text-2xl font-serif font-bold">Project</h3>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+
+    const Contact = () => (
+        <section id="contact" className="py-24">
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="grid lg:grid-cols-2 gap-16">
+                    <div>
+                        <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">Let's <span className="gold-text-gradient">Connect</span></h2>
+                        <div className="space-y-6">
+                            <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold"><Icon name="Phone" /></div>
+                                <div><p className="text-xs text-white/40 uppercase tracking-widest">Call Us</p><p className="text-lg font-medium">+91 7978535165</p></div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold"><Icon name="MapPin" /></div>
+                                <div><p className="text-xs text-white/40 uppercase tracking-widest">Address</p><p className="text-lg font-medium">Civil Township, Taporaj Panigrahi Marg, Rourkela, Odisha 769012</p></div>
+                            </div>
+                        </div>
+                        <div className="mt-12">
+                            <a href="https://wa.me/917978535165" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-white font-bold"><Icon name="MessageSquare" /> Chat on WhatsApp</a>
                         </div>
                     </div>
+                    
+                    <div className="p-8 md:p-12 rounded-3xl glass-card">
+                        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-white/60">Full Name</label>
+                                <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none" placeholder="" />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-white/60">Your Message</label>
+                                <textarea rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none" placeholder="Tell us about your project..." />
+                            </div>
+                            <button type="submit" className="w-full py-4 rounded-xl gold-gradient text-charcoal font-bold text-lg">Send Message</button>
+                        </form>
+                    </div>
                 </div>
-            </footer>
-        );
-    };
-
-    const App = () => {
-        return (
-            <div className="min-h-screen">
-                <Navbar />
-                <main>
-                    <Hero />
-                    <About />
-                    <Services />
-                    <Portfolio />
-                    <Contact />
-                </main>
-                <Footer />
             </div>
-        );
-    };
+        </section>
+    );
+
+    const App = () => (
+        <div className="min-h-screen">
+            <Navbar />
+            <main><Hero /><About /><Services /><Contact /></main>
+            <footer className="py-12 border-t border-white/10 text-center text-white/40 text-sm">
+                <p>© 2026 Shree Design Studio. All rights reserved.</p>
+            </footer>
+        </div>
+    );
 
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(<App />);
 </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shree Design Studio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.js"></script>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ["Inter", "sans-serif"],
+                    serif: ["Playfair Display", "serif"],
+                },
+                colors: {
+                    charcoal: '#121212',
+                    'charcoal-light': '#1E1E1E',
+                    'navy-dark': '#0A0F1E',
+                    gold: '#D4AF37',
+                    'gold-light': '#F1D592',
+                    'gold-dark': '#A68926',
+                },
+            }
+        }
+    }
+</script>
+
+<style type="text/css">
+    body {
+        background: linear-gradient(135deg, #121212 0%, #0A0F1E 100%);
+        background-attachment: fixed;
+        color: white;
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+    }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+    .gold-gradient { background: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #A68926 100%); }
+    .gold-text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #A68926 100%);
+    }
+    .glass-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .icon-glow { filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5)); }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #121212; }
+    ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+    const { motion, AnimatePresence } = Motion;
+
+    const Icon = ({ name, size = 24, className = "" }) => {
+        const iconRef = useRef(null);
+        useEffect(() => {
+            if (iconRef.current) {
+                const icon = lucide.icons[name];
+                if (icon) {
+                    lucide.createIcons({
+                        icons: { [name]: icon },
+                        attrs: { stroke: "currentColor", "stroke-width": 2, width: size, height: size, class: className }
+                    });
+                }
+            }
+        }, [name, size, className]);
+        return <i ref={iconRef} data-lucide={name} className={className}></i>;
+    };
+
+    const Navbar = () => (
+        <nav className="fixed top-0 left-0 w-full z-50 bg-white/10 backdrop-blur-md py-4 border-b border-white/20">
+            <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+                <a href="#" className="text-2xl font-serif font-bold gold-text-gradient tracking-tighter">SHREE</a>
+                <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-white/70">
+                    <a href="#about" className="hover:text-gold">About</a>
+                    <a href="#services" className="hover:text-gold">Services</a>
+                    <a href="#contact" className="px-5 py-2 rounded-full border border-gold/50 text-gold hover:bg-gold hover:text-charcoal transition-all">Get Started</a>
+                </div>
+            </div>
+        </nav>
+    );
+
+    const Hero = () => (
+        <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+                    <h1 className="text-6xl md:text-8xl font-serif font-bold mb-6 leading-tight">
+                        Shree <span className="gold-text-gradient italic">Design</span> Studio
+                    </h1>
+                    <p className="text-xl md:text-2xl text-white/60 max-w-2xl mx-auto mb-10 font-light">
+                        Innovative Design Meets AI Excellence. We craft premium digital experiences that define the future.
+                    </p>
+                    <div className="flex gap-4 justify-center">
+                        <a href="#contact" className="px-8 py-4 rounded-full gold-gradient text-charcoal font-bold text-lg">Get Started</a>
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+    );
+
+    const About = () => (
+        <section id="about" className="py-24 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="grid md:grid-cols-2 gap-16 items-center">
+                    <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+                        <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">
+                            Crafting the <span className="gold-text-gradient">Digital Future</span>
+                        </h2>
+                        <p className="text-lg text-white/70 mb-6 leading-relaxed">
+                            Shree Design Studio is a boutique creative agency where artistry meets cutting-edge technology. We specialize in delivering premium digital products that perform exceptionally.
+                        </p>
+                    </motion.div>
+                    <div className="aspect-square rounded-2xl overflow-hidden border border-white/20 glass-card">
+                        <img src="https://picsum.photos/seed/studio/800/800" className="w-full h-full object-cover grayscale opacity-80" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+
+    const Services = () => (
+        <section id="services" className="py-24 relative">
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="text-center mb-16">
+                    <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">Our Core <span className="gold-text-gradient">Capabilities</span></h2>
+                </div>
+                <div className="grid md:grid-cols-3 gap-8 text-center">
+                    {[1, 2, 3].map((i) => (
+                        <div key={i} className="p-10 rounded-3xl glass-card flex flex-col items-center justify-center min-h-[250px]">
+                            <h3 className="text-2xl font-serif font-bold">Project</h3>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+
+    const Contact = () => (
+        <section id="contact" className="py-24">
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="grid lg:grid-cols-2 gap-16">
+                    <div>
+                        <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">Let's <span className="gold-text-gradient">Connect</span></h2>
+                        <div className="space-y-6">
+                            <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold"><Icon name="Phone" /></div>
+                                <div><p className="text-xs text-white/40 uppercase tracking-widest">Call Us</p><p className="text-lg font-medium">+91 7978535165</p></div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold"><Icon name="MapPin" /></div>
+                                <div><p className="text-xs text-white/40 uppercase tracking-widest">Address</p><p className="text-lg font-medium">Civil Township, Taporaj Panigrahi Marg, Rourkela, Odisha 769012</p></div>
+                            </div>
+                        </div>
+                        <div className="mt-12">
+                            <a href="https://wa.me/917978535165" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-white font-bold"><Icon name="MessageSquare" /> Chat on WhatsApp</a>
+                        </div>
+                    </div>
+                    
+                    <div className="p-8 md:p-12 rounded-3xl glass-card">
+                        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-white/60">Full Name</label>
+                                <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none" placeholder="" />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-white/60">Your Message</label>
+                                <textarea rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none" placeholder="Tell us about your project..." />
+                            </div>
+                            <button type="submit" className="w-full py-4 rounded-xl gold-gradient text-charcoal font-bold text-lg">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+
+    const App = () => (
+        <div className="min-h-screen">
+            <Navbar />
+            <main><Hero /><About /><Services /><Contact /></main>
+            <footer className="py-12 border-t border-white/10 text-center text-white/40 text-sm">
+                <p>© 2026 Shree Design Studio. All rights reserved.</p>
+            </footer>
+        </div>
+    );
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+</script>
+</body>
+</html>
+
