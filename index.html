@@ -174,44 +174,69 @@
         </section>
     );
 
-    const Contact = () => (
-        <section id="contact" className="py-24">
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="grid lg:grid-cols-2 gap-16">
-                    <div>
-                        <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">Let's <span className="gold-text-gradient">Connect</span></h2>
-                        <div className="space-y-6">
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold"><Icon name="Phone" /></div>
-                                <div><p className="text-xs text-white/40 uppercase tracking-widest">Call Us</p><p className="text-lg font-medium">+91 7978535165</p></div>
+    const Contact = () => {
+        const [name, setName] = useState("");
+        const [message, setMessage] = useState("");
+
+        const handleWhatsAppSend = (e) => {
+            e.preventDefault();
+            const phoneNumber = "917978535165";
+            const fullText = `Hello, my name is ${name}. %0A%0A${message}`;
+            window.open(`https://wa.me/${phoneNumber}?text=${fullText}`, '_blank');
+        };
+
+        return (
+            <section id="contact" className="py-24">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="grid lg:grid-cols-2 gap-16">
+                        <div>
+                            <h2 className="text-4xl md:text-5xl font-serif font-bold mb-8">Let's <span className="gold-text-gradient">Connect</span></h2>
+                            <div className="space-y-6">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold"><Icon name="Phone" /></div>
+                                    <div><p className="text-xs text-white/40 uppercase tracking-widest">Call Us</p><p className="text-lg font-medium">+91 7978535165</p></div>
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold"><Icon name="MapPin" /></div>
+                                    <div><p className="text-xs text-white/40 uppercase tracking-widest">Address</p><p className="text-lg font-medium text-sm">Civil Township, Taporaj Panigrahi Marg, Rourkela, Odisha 769012</p></div>
+                                </div>
                             </div>
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center text-gold"><Icon name="MapPin" /></div>
-                                <div><p className="text-xs text-white/40 uppercase tracking-widest">Address</p><p className="text-lg font-medium text-sm">Civil Township, Taporaj Panigrahi Marg, Rourkela, Odisha 769012</p></div>
+                            <div className="mt-12">
+                                <a href="https://wa.me/917978535165" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-white font-bold"><Icon name="MessageSquare" /> WhatsApp Us</a>
                             </div>
                         </div>
-                        <div className="mt-12">
-                            <a href="https://wa.me/917978535165" className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#25D366] text-white font-bold"><Icon name="MessageSquare" /> WhatsApp Us</a>
+                        
+                        <div className="p-8 rounded-3xl glass-card">
+                            <form className="space-y-6" onSubmit={handleWhatsAppSend}>
+                                <div className="space-y-1">
+                                    <label className="text-xs font-bold text-white/40 uppercase">Full Name</label>
+                                    <input 
+                                        type="text" 
+                                        required
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-gold/50" 
+                                    />
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="text-xs font-bold text-white/40 uppercase">Your Message</label>
+                                    <textarea 
+                                        rows={4} 
+                                        required
+                                        value={message}
+                                        onChange={(e) => setMessage(e.target.value)}
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-gold/50" 
+                                        placeholder="Tell us about your project..." 
+                                    />
+                                </div>
+                                <button type="submit" className="w-full py-4 rounded-xl gold-gradient text-charcoal font-bold text-lg">Send Message</button>
+                            </form>
                         </div>
-                    </div>
-                    
-                    <div className="p-8 rounded-3xl glass-card">
-                        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                            <div className="space-y-1">
-                                <label className="text-xs font-bold text-white/40 uppercase">Full Name</label>
-                                <input type="text" className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-gold/50" />
-                            </div>
-                            <div className="space-y-1">
-                                <label className="text-xs font-bold text-white/40 uppercase">Your Message</label>
-                                <textarea rows={4} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-gold/50" placeholder="Tell us about your project..." />
-                            </div>
-                            <button type="submit" className="w-full py-4 rounded-xl gold-gradient text-charcoal font-bold text-lg">Send Message</button>
-                        </form>
                     </div>
                 </div>
-            </div>
-        </section>
-    );
+            </section>
+        );
+    };
 
     const App = () => (
         <div className="min-h-screen">
@@ -228,4 +253,3 @@
 </script>
 </body>
 </html>
-
