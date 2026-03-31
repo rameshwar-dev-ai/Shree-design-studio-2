@@ -134,13 +134,14 @@
     );
 
     const Projects = () => {
+        // Updated mapping based on the actual filenames in your GitHub screenshot
         const galleryItems = [
-            { img: "images/exterior.png", title: "Modern Architecture", desc: "Exterior Design" },
-            { img: "images/dining.png", title: "Luxury Dining", desc: "Interior Concept" },
-            { img: "images/bedroom-master.png", title: "Master Suite", desc: "Minimalist Decor" },
-            { img: "images/bedroom-suite.png", title: "Bespoke Bedroom", desc: "Custom Lighting" },
-            { img: "images/living-view.png", title: "Open Concept", desc: "Living & Bar Area" },
-            { img: "images/ceiling.png", title: "Designer Ceilings", desc: "Architectural Detail" }
+            { img: "house1.png", title: "Modern Architecture", desc: "Exterior Design" },
+            { img: "kitchen.png", title: "Luxury Kitchen", desc: "Interior Concept" },
+            { img: "bedroom.png", title: "Master Suite", desc: "Minimalist Decor" },
+            { img: "kitchen1.png", title: "Gourmet Space", desc: "Custom Cabinetry" },
+            { img: "bedroom1.png", title: "Bespoke Bedroom", desc: "Modern Living" },
+            { img: "fan1.png", title: "Designer Fixtures", desc: "Architectural Detail" }
         ];
 
         return (
@@ -159,14 +160,15 @@
                                 transition={{ delay: i * 0.1 }}
                                 className="group relative overflow-hidden rounded-3xl glass-card border border-white/5 transition-all hover:border-gold/40"
                             >
-                                <div className="aspect-[4/3] overflow-hidden">
+                                <div className="aspect-[4/3] overflow-hidden bg-charcoal-light">
                                     <img 
                                         src={item.img} 
                                         alt={item.title} 
-                                        className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" 
+                                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" 
+                                        onError={(e) => { e.target.src='https://via.placeholder.com/600x450/121212/D4AF37?text=Image+Not+Found'; }}
                                     />
                                 </div>
-                                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-charcoal to-transparent">
+                                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-charcoal via-charcoal/80 to-transparent">
                                     <h3 className="text-xl font-serif font-bold text-gold">{item.title}</h3>
                                     <p className="text-white/50 text-sm italic">{item.desc}</p>
                                 </div>
