@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Shree Design Studio | Premium Architectural Excellence</title>
+    <title>Shree Design Studio | Premium Web Design & AI Solutions</title>
     <meta name="description" content="Shree Design Studio provides premium digital solutions, high-end web design, and AI agent development. Located in Rourkela, Odisha.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -23,13 +23,14 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ["Plus Jakarta Sans", "sans-serif"],
+                        sans: ["Inter", "sans-serif"],
                         serif: ["Playfair Display", "serif"],
                     },
                     colors: {
-                        obsidian: '#05070A',
-                        champagne: '#E5D5B8',
-                        'champagne-dark': '#B89F71',
+                        charcoal: '#0A0A0B',
+                        gold: '#D4AF37',
+                        'gold-light': '#F1D592',
+                        'gold-dark': '#A68926',
                     },
                 }
             }
@@ -38,43 +39,26 @@
 
     <style type="text/css">
         body {
-            background-color: #05070A;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(184, 159, 113, 0.03) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(184, 159, 113, 0.03) 0px, transparent 50%);
-            color: #E5D5B8;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            /* Changed to a deep obsidian/midnight navy gradient for a more premium feel */
+            background: radial-gradient(circle at top right, #1a1a1d 0%, #050505 100%);
+            background-attachment: fixed;
+            color: white;
+            font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
         }
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        
-        .premium-gradient-text {
-            background: linear-gradient(135deg, #E5D5B8 0%, #B89F71 100%);
+        .gold-text-gradient {
+            background-clip: text;
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: transparent;
+            background-image: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #A68926 100%);
         }
-
         .glass-card {
+            /* Refined transparency for better contrast against the new background */
             background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(229, 213, 184, 0.08);
-            transition: all 0.5s ease;
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
         }
-
-        .glass-card:hover {
-            border-color: rgba(229, 213, 184, 0.2);
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .nav-blur {
-            background: rgba(5, 7, 10, 0.9);
-            backdrop-filter: blur(15px);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #05070A; }
-        ::-webkit-scrollbar-thumb { background: #B89F71; }
     </style>
 </head>
 <body>
@@ -90,7 +74,7 @@
             if (iconRef.current && lucide.icons[name]) {
                 lucide.createIcons({
                     icons: { [name]: lucide.icons[name] },
-                    attrs: { stroke: "currentColor", "stroke-width": 1.2, width: size, height: size, class: className }
+                    attrs: { stroke: "currentColor", "stroke-width": 2, width: size, height: size, class: className }
                 });
             }
         }, [name]);
@@ -98,40 +82,33 @@
     };
 
     const Navbar = () => (
-        <nav className="fixed top-0 left-0 w-full z-50 nav-blur py-6 border-b border-white/5">
-            <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
-                <a href="#" className="flex flex-col">
-                    <span className="text-xl md:text-2xl font-serif font-bold tracking-[0.15em] uppercase text-champagne leading-none">Shree Design Studio</span>
-                    <span className="text-[9px] tracking-[0.6em] uppercase text-white/30 mt-1">Architectural Excellence</span>
+        <nav className="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-xl py-4 border-b border-white/5">
+            <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+                <a href="#" className="flex items-center space-x-2">
+                    <Icon name="building-2" className="text-gold" size={28} />
+                    <span className="text-xl md:text-2xl font-serif font-bold gold-text-gradient uppercase tracking-tight">Shree Design Studio</span>
                 </a>
-                <div className="hidden md:flex items-center space-x-12 text-[10px] uppercase tracking-[0.3em] font-medium">
-                    <a href="#projects" className="text-white/40 hover:text-champagne transition-colors">Portfolio</a>
-                    <a href="#blog" className="text-white/40 hover:text-champagne transition-colors">Journal</a>
-                    <a href="#contact" className="text-champagne border-b border-champagne/30 pb-1 hover:border-champagne transition-all">Contact</a>
+                <div className="hidden md:flex items-center space-x-8 text-sm text-white/70">
+                    <a href="#projects" className="hover:text-gold transition-colors">Projects</a>
+                    <a href="#blog" className="hover:text-gold transition-colors">Insights</a>
+                    <a href="#contact" className="px-5 py-2 rounded-full border border-gold/50 text-gold hover:bg-gold hover:text-charcoal transition-all">Contact</a>
                 </div>
             </div>
         </nav>
     );
 
     const Hero = () => (
-        <section className="min-h-[85vh] flex items-center justify-center text-center px-6 pt-32">
-            <motion.div 
-                initial={{ opacity: 0, y: 30 }} 
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.2 }}
-            >
-                <h1 className="text-5xl md:text-8xl font-bold mb-10 leading-[1.1]">
-                    Defining the <br/>
-                    <span className="italic font-serif premium-gradient-text">Modern Skyline</span>
+        <section className="min-h-[90vh] flex items-center justify-center text-center px-6 pt-20">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <h1 className="text-5xl md:text-8xl font-bold mb-6 leading-tight text-white">
+                    Elevating <span className="gold-text-gradient italic font-serif">Spaces</span>
                 </h1>
-                <p className="text-white/40 max-w-lg mx-auto mb-14 text-sm font-light leading-relaxed tracking-widest uppercase">
-                    Bespoke interiors and structural mastery curated for the discerning few in Rourkela.
+                <p className="text-white/60 max-w-2xl mx-auto mb-10 text-lg md:text-xl font-light">
+                    Where structural integrity meets artistic vision. We create premium architectural and interior masterpieces in Rourkela.
                 </p>
-                <div className="flex justify-center">
-                    <a href="#projects" className="group flex flex-col items-center gap-4">
-                        <span className="text-[10px] uppercase tracking-[0.5em] text-champagne-dark">Discover</span>
-                        <div className="w-[1px] h-16 bg-gradient-to-b from-champagne-dark to-transparent group-hover:h-24 transition-all duration-700"></div>
-                    </a>
+                <div className="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="#projects" className="px-10 py-4 rounded-full bg-gradient-to-r from-gold to-gold-dark text-charcoal font-bold transition-transform hover:scale-105">View Portfolio</a>
+                    <a href="#blog" className="px-10 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-all text-white">Read Journal</a>
                 </div>
             </motion.div>
         </section>
@@ -139,42 +116,38 @@
 
     const Projects = () => {
         const galleryItems = [
-            { img: "./house1.png", title: "Project Obsidian", desc: "Residential Exterior" },
-            { img: "./kitchen3.png", title: "The Gilded Galley", desc: "Premium Kitchen" },
-            { img: "./bedroom.png", title: "Ethereal Rest", desc: "Master Suite" },
-            { img: "./kitchen1.png", title: "Monolith Cooking", desc: "Industrial Design" },
-            { img: "./bedroom1.png", title: "Ivory Sanctuary", desc: "Minimalist Living" },
-            { img: "./fan1.png", title: "The Detail Lab", desc: "Curated Fixtures" }
+            { img: "./house1.png", title: "Modern Exterior", desc: "Architectural Design" },
+            { img: "./kitchen3.png", title: "Luxury Kitchen", desc: "Interior Concept" },
+            { img: "./bedroom.png", title: "Master Suite", desc: "Minimalist Decor" },
+            { img: "./kitchen1.png", title: "Gourmet Space", desc: "Custom Cabinetry" },
+            { img: "./bedroom1.png", title: "Bespoke Bedroom", desc: "Modern Living" },
+            { img: "./fan1.png", title: "Designer Fixtures", desc: "Detailing" }
         ];
 
         return (
-            <section id="projects" className="py-32 px-6">
-                <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-24">
-                        <span className="text-[10px] uppercase tracking-[0.5em] text-champagne-dark block mb-4">Curated Works</span>
-                        <h2 className="text-4xl font-serif italic text-champagne">Selected Portfolio</h2>
+            <section id="projects" className="py-24 px-6 bg-black/20">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl font-serif font-bold mb-4 italic text-white">Our <span className="gold-text-gradient">Portfolio</span></h2>
+                        <div className="h-1 w-24 bg-gold mx-auto opacity-50"></div>
                     </div>
-                    {/* Smaller grid size and smaller card padding */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {galleryItems.map((item, i) => (
                             <motion.div 
                                 key={i} 
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                className="group cursor-pointer"
+                                whileHover={{ y: -10 }}
+                                className="group relative overflow-hidden rounded-2xl glass-card"
                             >
-                                <div className="relative aspect-[4/5] overflow-hidden bg-white/5 mb-5 rounded-sm">
+                                <div className="aspect-[4/3] overflow-hidden bg-white/5">
                                     <img 
                                         src={item.img} 
                                         alt={item.title} 
-                                        className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-[1.5s] group-hover:scale-110" 
+                                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" 
                                     />
-                                    <div className="absolute inset-0 bg-obsidian/10 group-hover:bg-transparent transition-colors duration-700"></div>
                                 </div>
-                                <div className="px-1">
-                                    <h3 className="text-md font-serif text-champagne mb-1 tracking-wider uppercase">{item.title}</h3>
-                                    <p className="text-white/20 text-[9px] uppercase tracking-[0.25em]">{item.desc}</p>
+                                <div className="p-6">
+                                    <h3 className="text-xl font-serif text-gold">{item.title}</h3>
+                                    <p className="text-white/40 text-sm">{item.desc}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -186,26 +159,43 @@
 
     const Blog = () => {
         const posts = [
-            { title: "Light as Material", cat: "Theory" },
-            { title: "The Rourkela Aesthetic", cat: "Culture" },
-            { title: "Sustainable Luxury", cat: "Innovation" }
+            {
+                date: "March 15, 2026",
+                title: "The Future of Sustainable Design",
+                desc: "Exploring how modern architecture integrates green energy and biophilic elements into urban residential spaces.",
+                category: "Innovation"
+            },
+            {
+                date: "Feb 28, 2026",
+                title: "Maximizing Small Urban Spaces",
+                desc: "Strategic interior design techniques to make compact city living feel expansive and luxurious without compromising utility.",
+                category: "Interior Tips"
+            },
+            {
+                date: "Jan 12, 2026",
+                title: "Lighting: The Hidden Language",
+                desc: "How architectural lighting transforms the mood of a room and defines the character of structural materials at night.",
+                category: "Structural"
+            }
         ];
 
         return (
-            <section id="blog" className="py-32 px-6 border-y border-white/5 bg-[#07090D]">
-                <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-20">
-                    <div className="md:w-1/3">
-                        <h2 className="text-3xl font-serif italic text-champagne mb-6">The Journal</h2>
-                        <p className="text-white/30 text-xs leading-loose tracking-widest uppercase">Deep dives into our design philosophy and the future of spatial planning.</p>
+            <section id="blog" className="py-24 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl font-serif font-bold mb-4 italic text-white">Design <span className="gold-text-gradient">Insights</span></h2>
+                        <p className="text-white/50">Thought leadership in modern architecture and spatial planning.</p>
                     </div>
-                    <div className="md:w-2/3 space-y-12">
+                    <div className="grid md:grid-cols-3 gap-8">
                         {posts.map((post, idx) => (
-                            <div key={idx} className="group flex justify-between items-end border-b border-white/10 pb-8 hover:border-champagne transition-colors cursor-pointer">
-                                <div>
-                                    <span className="text-[9px] text-champagne-dark uppercase tracking-widest mb-2 block">{post.cat}</span>
-                                    <h3 className="text-xl md:text-2xl font-serif text-white/80 group-hover:text-champagne transition-colors">{post.title}</h3>
+                            <div key={idx} className="p-8 rounded-2xl glass-card hover:bg-white/5 transition-all group">
+                                <span className="text-gold-dark text-xs font-bold uppercase tracking-widest">{post.category}</span>
+                                <h3 className="text-2xl font-serif mt-3 mb-4 group-hover:text-gold-light transition-colors text-white">{post.title}</h3>
+                                <p className="text-white/60 text-sm leading-relaxed mb-6">{post.desc}</p>
+                                <div className="flex justify-between items-center text-xs text-white/30 border-t border-white/10 pt-4">
+                                    <span>{post.date}</span>
+                                    <span className="hover:text-gold cursor-pointer">Read Full Article →</span>
                                 </div>
-                                <Icon name="chevron-right" size={20} className="text-white/20 group-hover:text-champagne transition-colors" />
                             </div>
                         ))}
                     </div>
@@ -215,36 +205,51 @@
     };
 
     const Contact = () => {
-        const [formData, setFormData] = useState({ name: "", address: "", message: "" });
+        const [formData, setFormData] = useState({
+            name: "",
+            address: "",
+            message: ""
+        });
 
         const handleWhatsApp = (e) => {
             e.preventDefault();
-            const text = `*Inquiry for Shree Design*%0A%0A*Client:* ${formData.name}%0A*Loc:* ${formData.address}%0A*Note:* ${formData.message}`;
-            window.open(`https://wa.me/917978535165?text=${text}`, '_blank');
+            const { name, address, message } = formData;
+            const text = `*New Project Inquiry*%0A%0A*Name:* ${name}%0A*Address:* ${address}%0A*Message:* ${message}`;
+            const url = `https://wa.me/917978535165?text=${text}`;
+            window.open(url, '_blank');
+        };
+
+        const handleChange = (e) => {
+            setFormData({ ...formData, [e.target.name]: e.target.value });
         };
 
         return (
-            <section id="contact" className="py-32 px-6">
-                <div className="max-w-2xl mx-auto text-center">
-                    <h2 className="text-4xl font-serif italic text-champagne mb-12">Inquire</h2>
-                    <form onSubmit={handleWhatsApp} className="space-y-10">
-                        <input 
-                            type="text" placeholder="Your Name" required
-                            className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-champagne transition-all text-sm placeholder:text-white/10"
-                            onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        />
-                        <input 
-                            type="text" placeholder="Project Location" required
-                            className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-champagne transition-all text-sm placeholder:text-white/10"
-                            onChange={(e) => setFormData({...formData, address: e.target.value})}
-                        />
+            <section id="contact" className="py-24 px-6 bg-black/10">
+                <div className="max-w-3xl mx-auto glass-card p-8 md:p-12 rounded-3xl shadow-2xl shadow-gold/5">
+                    <div className="text-center mb-10">
+                        <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-white">Start a <span className="gold-text-gradient italic">Project</span></h2>
+                        <p className="text-white/40">Share your vision with us and we'll bring it to life.</p>
+                    </div>
+                    <form onSubmit={handleWhatsApp} className="space-y-6">
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <input 
+                                type="text" name="name" placeholder="Your Name" required
+                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 outline-none focus:border-gold/50 transition-all text-white"
+                                onChange={handleChange}
+                            />
+                            <input 
+                                type="text" name="address" placeholder="your Address" required
+                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 outline-none focus:border-gold/50 transition-all text-white"
+                                onChange={handleChange}
+                            />
+                        </div>
                         <textarea 
-                            placeholder="Brief Overview of Vision" rows="2" required
-                            className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-champagne transition-all text-sm resize-none placeholder:text-white/10"
-                            onChange={(e) => setFormData({...formData, message: e.target.value})}
+                            name="message" placeholder="Describe your project (e.g., 3BHK Apartment, Office Interior, etc.)" rows="4" required
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 outline-none focus:border-gold/50 transition-all text-white"
+                            onChange={handleChange}
                         ></textarea>
-                        <button className="px-16 py-5 border border-champagne/30 text-champagne text-[10px] uppercase tracking-[0.4em] hover:bg-champagne hover:text-obsidian transition-all duration-700">
-                            Send Request
+                        <button className="w-full py-4 rounded-xl bg-gradient-to-r from-gold to-gold-dark text-charcoal font-bold text-lg hover:shadow-lg hover:shadow-gold/20 transition-all active:scale-[0.98]">
+                            Send via WhatsApp
                         </button>
                     </form>
                 </div>
@@ -253,14 +258,18 @@
     };
 
     const App = () => (
-        <div className="selection:bg-champagne selection:text-obsidian">
+        <div className="overflow-hidden">
             <Navbar />
             <Hero />
             <Projects />
             <Blog />
             <Contact />
-            <footer className="py-20 text-center">
-                <p className="text-[9px] uppercase tracking-[0.5em] text-white/20">© 2026 Shree Design Studio • Rourkela, Odisha</p>
+            <footer className="py-12 text-center text-white/20 text-sm border-t border-white/5">
+                <div className="mb-4">
+                    <Icon name="building-2" size={20} className="inline mr-2 opacity-50 text-gold" />
+                    <span className="font-serif">SHREE DESIGN STUDIO</span>
+                </div>
+                <p>© 2026 | Architectural Excellence in Rourkela, Odisha</p>
             </footer>
         </div>
     );
@@ -275,12 +284,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Shree Design Studio | Premium Architectural Excellence</title>
+    <title>Shree Design Studio | Premium Web Design & AI Solutions</title>
     <meta name="description" content="Shree Design Studio provides premium digital solutions, high-end web design, and AI agent development. Located in Rourkela, Odisha.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -294,13 +303,14 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ["Plus Jakarta Sans", "sans-serif"],
+                        sans: ["Inter", "sans-serif"],
                         serif: ["Playfair Display", "serif"],
                     },
                     colors: {
-                        obsidian: '#05070A',
-                        champagne: '#E5D5B8',
-                        'champagne-dark': '#B89F71',
+                        charcoal: '#0A0A0B',
+                        gold: '#D4AF37',
+                        'gold-light': '#F1D592',
+                        'gold-dark': '#A68926',
                     },
                 }
             }
@@ -309,43 +319,26 @@
 
     <style type="text/css">
         body {
-            background-color: #05070A;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(184, 159, 113, 0.03) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(184, 159, 113, 0.03) 0px, transparent 50%);
-            color: #E5D5B8;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            /* Changed to a deep obsidian/midnight navy gradient for a more premium feel */
+            background: radial-gradient(circle at top right, #1a1a1d 0%, #050505 100%);
+            background-attachment: fixed;
+            color: white;
+            font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
         }
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
-        
-        .premium-gradient-text {
-            background: linear-gradient(135deg, #E5D5B8 0%, #B89F71 100%);
+        .gold-text-gradient {
+            background-clip: text;
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: transparent;
+            background-image: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #A68926 100%);
         }
-
         .glass-card {
+            /* Refined transparency for better contrast against the new background */
             background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(229, 213, 184, 0.08);
-            transition: all 0.5s ease;
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
         }
-
-        .glass-card:hover {
-            border-color: rgba(229, 213, 184, 0.2);
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .nav-blur {
-            background: rgba(5, 7, 10, 0.9);
-            backdrop-filter: blur(15px);
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #05070A; }
-        ::-webkit-scrollbar-thumb { background: #B89F71; }
     </style>
 </head>
 <body>
@@ -361,7 +354,7 @@
             if (iconRef.current && lucide.icons[name]) {
                 lucide.createIcons({
                     icons: { [name]: lucide.icons[name] },
-                    attrs: { stroke: "currentColor", "stroke-width": 1.2, width: size, height: size, class: className }
+                    attrs: { stroke: "currentColor", "stroke-width": 2, width: size, height: size, class: className }
                 });
             }
         }, [name]);
@@ -369,40 +362,33 @@
     };
 
     const Navbar = () => (
-        <nav className="fixed top-0 left-0 w-full z-50 nav-blur py-6 border-b border-white/5">
-            <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
-                <a href="#" className="flex flex-col">
-                    <span className="text-xl md:text-2xl font-serif font-bold tracking-[0.15em] uppercase text-champagne leading-none">Shree Design Studio</span>
-                    <span className="text-[9px] tracking-[0.6em] uppercase text-white/30 mt-1">Architectural Excellence</span>
+        <nav className="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-xl py-4 border-b border-white/5">
+            <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+                <a href="#" className="flex items-center space-x-2">
+                    <Icon name="building-2" className="text-gold" size={28} />
+                    <span className="text-xl md:text-2xl font-serif font-bold gold-text-gradient uppercase tracking-tight">Shree Design Studio</span>
                 </a>
-                <div className="hidden md:flex items-center space-x-12 text-[10px] uppercase tracking-[0.3em] font-medium">
-                    <a href="#projects" className="text-white/40 hover:text-champagne transition-colors">Portfolio</a>
-                    <a href="#blog" className="text-white/40 hover:text-champagne transition-colors">Journal</a>
-                    <a href="#contact" className="text-champagne border-b border-champagne/30 pb-1 hover:border-champagne transition-all">Contact</a>
+                <div className="hidden md:flex items-center space-x-8 text-sm text-white/70">
+                    <a href="#projects" className="hover:text-gold transition-colors">Projects</a>
+                    <a href="#blog" className="hover:text-gold transition-colors">Insights</a>
+                    <a href="#contact" className="px-5 py-2 rounded-full border border-gold/50 text-gold hover:bg-gold hover:text-charcoal transition-all">Contact</a>
                 </div>
             </div>
         </nav>
     );
 
     const Hero = () => (
-        <section className="min-h-[85vh] flex items-center justify-center text-center px-6 pt-32">
-            <motion.div 
-                initial={{ opacity: 0, y: 30 }} 
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.2 }}
-            >
-                <h1 className="text-5xl md:text-8xl font-bold mb-10 leading-[1.1]">
-                    Defining the <br/>
-                    <span className="italic font-serif premium-gradient-text">Modern Skyline</span>
+        <section className="min-h-[90vh] flex items-center justify-center text-center px-6 pt-20">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <h1 className="text-5xl md:text-8xl font-bold mb-6 leading-tight text-white">
+                    Elevating <span className="gold-text-gradient italic font-serif">Spaces</span>
                 </h1>
-                <p className="text-white/40 max-w-lg mx-auto mb-14 text-sm font-light leading-relaxed tracking-widest uppercase">
-                    Bespoke interiors and structural mastery curated for the discerning few in Rourkela.
+                <p className="text-white/60 max-w-2xl mx-auto mb-10 text-lg md:text-xl font-light">
+                    Where structural integrity meets artistic vision. We create premium architectural and interior masterpieces in Rourkela.
                 </p>
-                <div className="flex justify-center">
-                    <a href="#projects" className="group flex flex-col items-center gap-4">
-                        <span className="text-[10px] uppercase tracking-[0.5em] text-champagne-dark">Discover</span>
-                        <div className="w-[1px] h-16 bg-gradient-to-b from-champagne-dark to-transparent group-hover:h-24 transition-all duration-700"></div>
-                    </a>
+                <div className="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="#projects" className="px-10 py-4 rounded-full bg-gradient-to-r from-gold to-gold-dark text-charcoal font-bold transition-transform hover:scale-105">View Portfolio</a>
+                    <a href="#blog" className="px-10 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-all text-white">Read Journal</a>
                 </div>
             </motion.div>
         </section>
@@ -410,42 +396,38 @@
 
     const Projects = () => {
         const galleryItems = [
-            { img: "./house1.png", title: "Project Obsidian", desc: "Residential Exterior" },
-            { img: "./kitchen3.png", title: "The Gilded Galley", desc: "Premium Kitchen" },
-            { img: "./bedroom.png", title: "Ethereal Rest", desc: "Master Suite" },
-            { img: "./kitchen1.png", title: "Monolith Cooking", desc: "Industrial Design" },
-            { img: "./bedroom1.png", title: "Ivory Sanctuary", desc: "Minimalist Living" },
-            { img: "./fan1.png", title: "The Detail Lab", desc: "Curated Fixtures" }
+            { img: "./house1.png", title: "Modern Exterior", desc: "Architectural Design" },
+            { img: "./kitchen3.png", title: "Luxury Kitchen", desc: "Interior Concept" },
+            { img: "./bedroom.png", title: "Master Suite", desc: "Minimalist Decor" },
+            { img: "./kitchen1.png", title: "Gourmet Space", desc: "Custom Cabinetry" },
+            { img: "./bedroom1.png", title: "Bespoke Bedroom", desc: "Modern Living" },
+            { img: "./fan1.png", title: "Designer Fixtures", desc: "Detailing" }
         ];
 
         return (
-            <section id="projects" className="py-32 px-6">
-                <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-24">
-                        <span className="text-[10px] uppercase tracking-[0.5em] text-champagne-dark block mb-4">Curated Works</span>
-                        <h2 className="text-4xl font-serif italic text-champagne">Selected Portfolio</h2>
+            <section id="projects" className="py-24 px-6 bg-black/20">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl font-serif font-bold mb-4 italic text-white">Our <span className="gold-text-gradient">Portfolio</span></h2>
+                        <div className="h-1 w-24 bg-gold mx-auto opacity-50"></div>
                     </div>
-                    {/* Smaller grid size and smaller card padding */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {galleryItems.map((item, i) => (
                             <motion.div 
                                 key={i} 
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                className="group cursor-pointer"
+                                whileHover={{ y: -10 }}
+                                className="group relative overflow-hidden rounded-2xl glass-card"
                             >
-                                <div className="relative aspect-[4/5] overflow-hidden bg-white/5 mb-5 rounded-sm">
+                                <div className="aspect-[4/3] overflow-hidden bg-white/5">
                                     <img 
                                         src={item.img} 
                                         alt={item.title} 
-                                        className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-[1.5s] group-hover:scale-110" 
+                                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" 
                                     />
-                                    <div className="absolute inset-0 bg-obsidian/10 group-hover:bg-transparent transition-colors duration-700"></div>
                                 </div>
-                                <div className="px-1">
-                                    <h3 className="text-md font-serif text-champagne mb-1 tracking-wider uppercase">{item.title}</h3>
-                                    <p className="text-white/20 text-[9px] uppercase tracking-[0.25em]">{item.desc}</p>
+                                <div className="p-6">
+                                    <h3 className="text-xl font-serif text-gold">{item.title}</h3>
+                                    <p className="text-white/40 text-sm">{item.desc}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -457,26 +439,43 @@
 
     const Blog = () => {
         const posts = [
-            { title: "Light as Material", cat: "Theory" },
-            { title: "The Rourkela Aesthetic", cat: "Culture" },
-            { title: "Sustainable Luxury", cat: "Innovation" }
+            {
+                date: "March 15, 2026",
+                title: "The Future of Sustainable Design",
+                desc: "Exploring how modern architecture integrates green energy and biophilic elements into urban residential spaces.",
+                category: "Innovation"
+            },
+            {
+                date: "Feb 28, 2026",
+                title: "Maximizing Small Urban Spaces",
+                desc: "Strategic interior design techniques to make compact city living feel expansive and luxurious without compromising utility.",
+                category: "Interior Tips"
+            },
+            {
+                date: "Jan 12, 2026",
+                title: "Lighting: The Hidden Language",
+                desc: "How architectural lighting transforms the mood of a room and defines the character of structural materials at night.",
+                category: "Structural"
+            }
         ];
 
         return (
-            <section id="blog" className="py-32 px-6 border-y border-white/5 bg-[#07090D]">
-                <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-20">
-                    <div className="md:w-1/3">
-                        <h2 className="text-3xl font-serif italic text-champagne mb-6">The Journal</h2>
-                        <p className="text-white/30 text-xs leading-loose tracking-widest uppercase">Deep dives into our design philosophy and the future of spatial planning.</p>
+            <section id="blog" className="py-24 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl font-serif font-bold mb-4 italic text-white">Design <span className="gold-text-gradient">Insights</span></h2>
+                        <p className="text-white/50">Thought leadership in modern architecture and spatial planning.</p>
                     </div>
-                    <div className="md:w-2/3 space-y-12">
+                    <div className="grid md:grid-cols-3 gap-8">
                         {posts.map((post, idx) => (
-                            <div key={idx} className="group flex justify-between items-end border-b border-white/10 pb-8 hover:border-champagne transition-colors cursor-pointer">
-                                <div>
-                                    <span className="text-[9px] text-champagne-dark uppercase tracking-widest mb-2 block">{post.cat}</span>
-                                    <h3 className="text-xl md:text-2xl font-serif text-white/80 group-hover:text-champagne transition-colors">{post.title}</h3>
+                            <div key={idx} className="p-8 rounded-2xl glass-card hover:bg-white/5 transition-all group">
+                                <span className="text-gold-dark text-xs font-bold uppercase tracking-widest">{post.category}</span>
+                                <h3 className="text-2xl font-serif mt-3 mb-4 group-hover:text-gold-light transition-colors text-white">{post.title}</h3>
+                                <p className="text-white/60 text-sm leading-relaxed mb-6">{post.desc}</p>
+                                <div className="flex justify-between items-center text-xs text-white/30 border-t border-white/10 pt-4">
+                                    <span>{post.date}</span>
+                                    <span className="hover:text-gold cursor-pointer">Read Full Article →</span>
                                 </div>
-                                <Icon name="chevron-right" size={20} className="text-white/20 group-hover:text-champagne transition-colors" />
                             </div>
                         ))}
                     </div>
@@ -486,36 +485,51 @@
     };
 
     const Contact = () => {
-        const [formData, setFormData] = useState({ name: "", address: "", message: "" });
+        const [formData, setFormData] = useState({
+            name: "",
+            address: "",
+            message: ""
+        });
 
         const handleWhatsApp = (e) => {
             e.preventDefault();
-            const text = `*Inquiry for Shree Design*%0A%0A*Client:* ${formData.name}%0A*Loc:* ${formData.address}%0A*Note:* ${formData.message}`;
-            window.open(`https://wa.me/917978535165?text=${text}`, '_blank');
+            const { name, address, message } = formData;
+            const text = `*New Project Inquiry*%0A%0A*Name:* ${name}%0A*Address:* ${address}%0A*Message:* ${message}`;
+            const url = `https://wa.me/917978535165?text=${text}`;
+            window.open(url, '_blank');
+        };
+
+        const handleChange = (e) => {
+            setFormData({ ...formData, [e.target.name]: e.target.value });
         };
 
         return (
-            <section id="contact" className="py-32 px-6">
-                <div className="max-w-2xl mx-auto text-center">
-                    <h2 className="text-4xl font-serif italic text-champagne mb-12">Inquire</h2>
-                    <form onSubmit={handleWhatsApp} className="space-y-10">
-                        <input 
-                            type="text" placeholder="Your Name" required
-                            className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-champagne transition-all text-sm placeholder:text-white/10"
-                            onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        />
-                        <input 
-                            type="text" placeholder="Project Location" required
-                            className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-champagne transition-all text-sm placeholder:text-white/10"
-                            onChange={(e) => setFormData({...formData, address: e.target.value})}
-                        />
+            <section id="contact" className="py-24 px-6 bg-black/10">
+                <div className="max-w-3xl mx-auto glass-card p-8 md:p-12 rounded-3xl shadow-2xl shadow-gold/5">
+                    <div className="text-center mb-10">
+                        <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-white">Start a <span className="gold-text-gradient italic">Project</span></h2>
+                        <p className="text-white/40">Share your vision with us and we'll bring it to life.</p>
+                    </div>
+                    <form onSubmit={handleWhatsApp} className="space-y-6">
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <input 
+                                type="text" name="name" placeholder="Your Name" required
+                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 outline-none focus:border-gold/50 transition-all text-white"
+                                onChange={handleChange}
+                            />
+                            <input 
+                                type="text" name="address" placeholder="your Address" required
+                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 outline-none focus:border-gold/50 transition-all text-white"
+                                onChange={handleChange}
+                            />
+                        </div>
                         <textarea 
-                            placeholder="Brief Overview of Vision" rows="2" required
-                            className="w-full bg-transparent border-b border-white/10 py-4 outline-none focus:border-champagne transition-all text-sm resize-none placeholder:text-white/10"
-                            onChange={(e) => setFormData({...formData, message: e.target.value})}
+                            name="message" placeholder="Describe your project (e.g., 3BHK Apartment, Office Interior, etc.)" rows="4" required
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 outline-none focus:border-gold/50 transition-all text-white"
+                            onChange={handleChange}
                         ></textarea>
-                        <button className="px-16 py-5 border border-champagne/30 text-champagne text-[10px] uppercase tracking-[0.4em] hover:bg-champagne hover:text-obsidian transition-all duration-700">
-                            Send Request
+                        <button className="w-full py-4 rounded-xl bg-gradient-to-r from-gold to-gold-dark text-charcoal font-bold text-lg hover:shadow-lg hover:shadow-gold/20 transition-all active:scale-[0.98]">
+                            Send via WhatsApp
                         </button>
                     </form>
                 </div>
@@ -524,14 +538,298 @@
     };
 
     const App = () => (
-        <div className="selection:bg-champagne selection:text-obsidian">
+        <div className="overflow-hidden">
             <Navbar />
             <Hero />
             <Projects />
             <Blog />
             <Contact />
-            <footer className="py-20 text-center">
-                <p className="text-[9px] uppercase tracking-[0.5em] text-white/20">© 2026 Shree Design Studio • Rourkela, Odisha</p>
+            <footer className="py-12 text-center text-white/20 text-sm border-t border-white/5">
+                <div className="mb-4">
+                    <Icon name="building-2" size={20} className="inline mr-2 opacity-50 text-gold" />
+                    <span className="font-serif">SHREE DESIGN STUDIO</span>
+                </div>
+                <p>© 2026 | Architectural Excellence in Rourkela, Odisha</p>
+            </footer>
+        </div>
+    );
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Shree Design Studio | Premium Web Design & AI Solutions</title>
+    <meta name="description" content="Shree Design Studio provides premium digital solutions, high-end web design, and AI agent development. Located in Rourkela, Odisha.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                        serif: ["Playfair Display", "serif"],
+                    },
+                    colors: {
+                        charcoal: '#0A0A0B',
+                        gold: '#D4AF37',
+                        'gold-light': '#F1D592',
+                        'gold-dark': '#A68926',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style type="text/css">
+        body {
+            /* Changed to a deep obsidian/midnight navy gradient for a more premium feel */
+            background: radial-gradient(circle at top right, #1a1a1d 0%, #050505 100%);
+            background-attachment: fixed;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .gold-text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #A68926 100%);
+        }
+        .glass-card {
+            /* Refined transparency for better contrast against the new background */
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+    const { motion } = Motion;
+
+    const Icon = ({ name, size = 24, className = "" }) => {
+        const iconRef = useRef(null);
+        useEffect(() => {
+            if (iconRef.current && lucide.icons[name]) {
+                lucide.createIcons({
+                    icons: { [name]: lucide.icons[name] },
+                    attrs: { stroke: "currentColor", "stroke-width": 2, width: size, height: size, class: className }
+                });
+            }
+        }, [name]);
+        return <i ref={iconRef} data-lucide={name} className={className}></i>;
+    };
+
+    const Navbar = () => (
+        <nav className="fixed top-0 left-0 w-full z-50 bg-black/60 backdrop-blur-xl py-4 border-b border-white/5">
+            <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+                <a href="#" className="flex items-center space-x-2">
+                    <Icon name="building-2" className="text-gold" size={28} />
+                    <span className="text-xl md:text-2xl font-serif font-bold gold-text-gradient uppercase tracking-tight">Shree Design Studio</span>
+                </a>
+                <div className="hidden md:flex items-center space-x-8 text-sm text-white/70">
+                    <a href="#projects" className="hover:text-gold transition-colors">Projects</a>
+                    <a href="#blog" className="hover:text-gold transition-colors">Insights</a>
+                    <a href="#contact" className="px-5 py-2 rounded-full border border-gold/50 text-gold hover:bg-gold hover:text-charcoal transition-all">Contact</a>
+                </div>
+            </div>
+        </nav>
+    );
+
+    const Hero = () => (
+        <section className="min-h-[90vh] flex items-center justify-center text-center px-6 pt-20">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <h1 className="text-5xl md:text-8xl font-bold mb-6 leading-tight text-white">
+                    Elevating <span className="gold-text-gradient italic font-serif">Spaces</span>
+                </h1>
+                <p className="text-white/60 max-w-2xl mx-auto mb-10 text-lg md:text-xl font-light">
+                    Where structural integrity meets artistic vision. We create premium architectural and interior masterpieces in Rourkela.
+                </p>
+                <div className="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="#projects" className="px-10 py-4 rounded-full bg-gradient-to-r from-gold to-gold-dark text-charcoal font-bold transition-transform hover:scale-105">View Portfolio</a>
+                    <a href="#blog" className="px-10 py-4 rounded-full border border-white/20 hover:bg-white/10 transition-all text-white">Read Journal</a>
+                </div>
+            </motion.div>
+        </section>
+    );
+
+    const Projects = () => {
+        const galleryItems = [
+            { img: "./house1.png", title: "Modern Exterior", desc: "Architectural Design" },
+            { img: "./kitchen3.png", title: "Luxury Kitchen", desc: "Interior Concept" },
+            { img: "./bedroom.png", title: "Master Suite", desc: "Minimalist Decor" },
+            { img: "./kitchen1.png", title: "Gourmet Space", desc: "Custom Cabinetry" },
+            { img: "./bedroom1.png", title: "Bespoke Bedroom", desc: "Modern Living" },
+            { img: "./fan1.png", title: "Designer Fixtures", desc: "Detailing" }
+        ];
+
+        return (
+            <section id="projects" className="py-24 px-6 bg-black/20">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl font-serif font-bold mb-4 italic text-white">Our <span className="gold-text-gradient">Portfolio</span></h2>
+                        <div className="h-1 w-24 bg-gold mx-auto opacity-50"></div>
+                    </div>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {galleryItems.map((item, i) => (
+                            <motion.div 
+                                key={i} 
+                                whileHover={{ y: -10 }}
+                                className="group relative overflow-hidden rounded-2xl glass-card"
+                            >
+                                <div className="aspect-[4/3] overflow-hidden bg-white/5">
+                                    <img 
+                                        src={item.img} 
+                                        alt={item.title} 
+                                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" 
+                                    />
+                                </div>
+                                <div className="p-6">
+                                    <h3 className="text-xl font-serif text-gold">{item.title}</h3>
+                                    <p className="text-white/40 text-sm">{item.desc}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+    };
+
+    const Blog = () => {
+        const posts = [
+            {
+                date: "March 15, 2026",
+                title: "The Future of Sustainable Design",
+                desc: "Exploring how modern architecture integrates green energy and biophilic elements into urban residential spaces.",
+                category: "Innovation"
+            },
+            {
+                date: "Feb 28, 2026",
+                title: "Maximizing Small Urban Spaces",
+                desc: "Strategic interior design techniques to make compact city living feel expansive and luxurious without compromising utility.",
+                category: "Interior Tips"
+            },
+            {
+                date: "Jan 12, 2026",
+                title: "Lighting: The Hidden Language",
+                desc: "How architectural lighting transforms the mood of a room and defines the character of structural materials at night.",
+                category: "Structural"
+            }
+        ];
+
+        return (
+            <section id="blog" className="py-24 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl font-serif font-bold mb-4 italic text-white">Design <span className="gold-text-gradient">Insights</span></h2>
+                        <p className="text-white/50">Thought leadership in modern architecture and spatial planning.</p>
+                    </div>
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {posts.map((post, idx) => (
+                            <div key={idx} className="p-8 rounded-2xl glass-card hover:bg-white/5 transition-all group">
+                                <span className="text-gold-dark text-xs font-bold uppercase tracking-widest">{post.category}</span>
+                                <h3 className="text-2xl font-serif mt-3 mb-4 group-hover:text-gold-light transition-colors text-white">{post.title}</h3>
+                                <p className="text-white/60 text-sm leading-relaxed mb-6">{post.desc}</p>
+                                <div className="flex justify-between items-center text-xs text-white/30 border-t border-white/10 pt-4">
+                                    <span>{post.date}</span>
+                                    <span className="hover:text-gold cursor-pointer">Read Full Article →</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+    };
+
+    const Contact = () => {
+        const [formData, setFormData] = useState({
+            name: "",
+            address: "",
+            message: ""
+        });
+
+        const handleWhatsApp = (e) => {
+            e.preventDefault();
+            const { name, address, message } = formData;
+            const text = `*New Project Inquiry*%0A%0A*Name:* ${name}%0A*Address:* ${address}%0A*Message:* ${message}`;
+            const url = `https://wa.me/917978535165?text=${text}`;
+            window.open(url, '_blank');
+        };
+
+        const handleChange = (e) => {
+            setFormData({ ...formData, [e.target.name]: e.target.value });
+        };
+
+        return (
+            <section id="contact" className="py-24 px-6 bg-black/10">
+                <div className="max-w-3xl mx-auto glass-card p-8 md:p-12 rounded-3xl shadow-2xl shadow-gold/5">
+                    <div className="text-center mb-10">
+                        <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-white">Start a <span className="gold-text-gradient italic">Project</span></h2>
+                        <p className="text-white/40">Share your vision with us and we'll bring it to life.</p>
+                    </div>
+                    <form onSubmit={handleWhatsApp} className="space-y-6">
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <input 
+                                type="text" name="name" placeholder="Your Name" required
+                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 outline-none focus:border-gold/50 transition-all text-white"
+                                onChange={handleChange}
+                            />
+                            <input 
+                                type="text" name="address" placeholder="your Address" required
+                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 outline-none focus:border-gold/50 transition-all text-white"
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <textarea 
+                            name="message" placeholder="Describe your project (e.g., 3BHK Apartment, Office Interior, etc.)" rows="4" required
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 outline-none focus:border-gold/50 transition-all text-white"
+                            onChange={handleChange}
+                        ></textarea>
+                        <button className="w-full py-4 rounded-xl bg-gradient-to-r from-gold to-gold-dark text-charcoal font-bold text-lg hover:shadow-lg hover:shadow-gold/20 transition-all active:scale-[0.98]">
+                            Send via WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </section>
+        );
+    };
+
+    const App = () => (
+        <div className="overflow-hidden">
+            <Navbar />
+            <Hero />
+            <Projects />
+            <Blog />
+            <Contact />
+            <footer className="py-12 text-center text-white/20 text-sm border-t border-white/5">
+                <div className="mb-4">
+                    <Icon name="building-2" size={20} className="inline mr-2 opacity-50 text-gold" />
+                    <span className="font-serif">SHREE DESIGN STUDIO</span>
+                </div>
+                <p>© 2026 | Architectural Excellence in Rourkela, Odisha</p>
             </footer>
         </div>
     );
