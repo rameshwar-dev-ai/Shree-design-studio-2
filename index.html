@@ -135,13 +135,16 @@
         return (
             <section id="projects" className="py-32 px-6 bg-white">
                 <div className="max-w-7xl mx-auto">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-20">
+                    {/* Updated Header: Centered layout */}
+                    <div className="flex flex-col items-center text-center mb-20">
                         <div className="max-w-xl">
                             <h2 className="text-5xl font-serif font-bold mb-6 text-clay">Our <span className="italic">Portfolio</span></h2>
                             <p className="text-clay/50 italic font-serif text-xl">Curated works of spatial excellence.</p>
                         </div>
-                        <div className="h-[1px] flex-grow mx-10 bg-clay/10 hidden md:block mb-4"></div>
+                        {/* Decorative line centered below the text */}
+                        <div className="h-[1px] w-24 bg-clay/10 mt-8"></div>
                     </div>
+                    
                     <div className="flex flex-wrap justify-center gap-10">
                         {galleryItems.map((item, i) => (
                             <motion.div 
@@ -443,13 +446,16 @@
         return (
             <section id="projects" className="py-32 px-6 bg-white">
                 <div className="max-w-7xl mx-auto">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-20">
+                    {/* Updated Header: Centered layout */}
+                    <div className="flex flex-col items-center text-center mb-20">
                         <div className="max-w-xl">
                             <h2 className="text-5xl font-serif font-bold mb-6 text-clay">Our <span className="italic">Portfolio</span></h2>
                             <p className="text-clay/50 italic font-serif text-xl">Curated works of spatial excellence.</p>
                         </div>
-                        <div className="h-[1px] flex-grow mx-10 bg-clay/10 hidden md:block mb-4"></div>
+                        {/* Decorative line centered below the text */}
+                        <div className="h-[1px] w-24 bg-clay/10 mt-8"></div>
                     </div>
+                    
                     <div className="flex flex-wrap justify-center gap-10">
                         {galleryItems.map((item, i) => (
                             <motion.div 
@@ -614,4 +620,3 @@
 </script>
 </body>
 </html>
-
